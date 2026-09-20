@@ -1,0 +1,215 @@
+\chapter{Computer Networks}
+
+\section{Introduction}
+
+As humanity has grown and dispersed across the globe over time, the need for faster and more reliable ways to connect people has become paramount.
+
+With the revolutionary invention of the computer, this connection has become easier, faster, and more reliable than ever before. Over time, communication has evolved beyond human interaction to include machine-to-machine communication, as seen in Internet of Things (IoT) applications and many other technologies.
+
+This chapter explores how devices and computers communicate with each other, examining connection methods, protocols, and real-world applications.
+
+\section{Computer Network}
+a collection of computers , other devices , and/or
+peripherals connected together through connecting
+media (Ethernet cables and/or WIFI) to perform certain task that needs a cooperation between two or more devices such as:
+\begin{itemize}
+	\item File Sharing
+	\item Devices Sharing
+	\item Software Sharing with multi-user licenses.
+	\item Voice and Video calls
+	\item video streaming
+	\item CCTV 
+	\item Share Internet Access
+\end{itemize}
+
+\section{Network Elements}
+Any computer network consists of two main parts: 
+\begin{enumerate}
+	\item \textbf{Hardware}
+	\begin{itemize}
+		\item Devices : Computers - Printers - Phone - Routers - Switches
+		\item Mediums : Wired - Wireless - Satellites
+		
+	\end{itemize}
+	
+	
+	
+	\item \textbf{Software}
+	\begin{itemize}
+		\item Messages : Information that travels over the medium such as Mails-WhatsApp….etc
+		\item Protocols : Governs how messages flow across network such as http –https-FTP-RDP
+	\end{itemize}
+\end{enumerate}
+
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{figures/network1}
+	\caption{Example of a network}
+	\label{fig:network1}
+\end{figure}
+
+
+\section{Network Basic Terminologies}
+
+
+
+\noindent
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Hub}
+	A basic physical device that links multiple computers or devices together to form a local area network (LAN), acting as a connection point that broadcasts incoming data to every port, it's basic, slow ,dummy and outdated.
+	\subsubsection{Examples}
+	\begin{itemize}
+		\item NETGEAR EN104
+		\item 3Com SuperStack II Hub 10/100
+		\item Cisco Micro Hub Series
+	\end{itemize}
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{figures/HUB1}
+		\caption{HUB}
+		\label{hub1}
+	\end{figure}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Switch}
+	An improved version of the Hub that performs the same function as the Hub (links multiple computers or devices together to form a local area network (LAN)), but it's faster and more secure because it sends data in every transmission from sender to receiver and not to all points.
+	\subsubsection{Examples}
+	\begin{itemize}
+		\item TP-Link LS1005G
+		\item Cisco Micro switches Series
+		\item Linksys LGS328C
+		\item MERCUSYS MS105
+	\end{itemize}
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{figures/Switch1}
+		\caption{Switch}
+		\label{switch1}
+	\end{figure}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Repeater}
+	A device that restores the signal and ensures signal integrity in long signal cables. More than one can be placed along the transmission line if the line is long enough.
+	\subsubsection{Examples}
+	\begin{itemize}
+		\item VIMIN 2-Port Outdoor PoE Gigabit Extender
+		\item Revotech 2 Port POE Extender
+		\item 
+	\end{itemize}
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{figures/repeater1}
+		\caption{Repeater}
+		\label{repeater1}
+	\end{figure}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Access point}
+	It can be considered a converter that transforms a wired signal into a wireless one, allowing devices to connect to a wired LAN network via Wi-Fi.
+	\subsubsection{Examples}
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{figures/AP1}
+		\caption{Access point}
+		\label{AP1}
+	\end{figure}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Router}
+	A device that allows communication between networks and enables communication with the network that carries the internet.
+	\subsubsection{Examples}
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{figures/router1}
+		\caption{Router}
+		\label{Router}
+	\end{figure}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{NIC (Network Interface Card)}
+	a hardware that enable the device to directly access the network.
+	and there is two types of it:
+	\begin{enumerate}
+		\item Internal NIC
+		plugs into the motherboard directly
+		
+		\item External NIC
+		Wireless and USB based
+	\end{enumerate}
+	\subsubsection{Examples}
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.45\linewidth]{figures/NIC1}
+		\includegraphics[width=0.45\linewidth]{figures/NIC2}
+		\caption{NIC cards}
+		\label{NIC}
+	\end{figure}
+\end{minipage}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Mac address}
+	physical and unique address over the world burned on the
+	NIC card.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{figures/MAC1}
+		\caption{Mac address}
+		\label{MAC}
+	\end{figure}
+\end{minipage}
+
+\subsection{IP address}
+logical address, identify each device on an IP network layer.
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.5\linewidth]{figures/IP1}
+	\caption{IP address}
+	\label{fig:ip1}
+\end{figure}
+
+
+\subsection{Protocols}
+Communication rules that all entity must agree onhttp –https-FTP-
+RDP
+\begin{figure}[!h]
+	\centering
+	\includegraphics[width=0.7\linewidth]{figures/protocols1}
+	\caption{TCP/IP model}
+	\label{fig:protocols1}
+\end{figure}
+
+

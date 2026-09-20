@@ -1,0 +1,75 @@
+\begin{titlepage}
+
+\begin{center}
+
+%% Print the title
+{\makeatletter
+\largetitlestyle\fontsize{45}{45}\selectfont\@title
+\makeatother}
+
+%% Print the subtitle
+{\makeatletter
+\ifdefvoid{\@subtitle}{}{\bigskip\titlestyle\fontsize{20}{20}\selectfont\@subtitle}
+\makeatother}
+
+\bigskip
+\bigskip
+
+by
+
+\bigskip
+\bigskip
+
+%% Print the name of the author
+{\makeatletter
+\largetitlestyle\fontsize{25}{25}\selectfont\@author
+\makeatother}
+
+\bigskip
+\bigskip
+
+\vfill
+
+
+%% Print some more information at the bottom
+\begin{tabular}{ll}
+    Instructor: & Eng. Radwa Mosaad Ahmed \\
+    &Eng.  \\
+    Institute: & Information Technology Institute
+\end{tabular}
+
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+\bigskip
+
+
+
+
+\end{center}
+
+%% Insert the TU Delft logo and the IP notice at the bottom of the page
+\begin{tikzpicture}[remember picture, overlay]
+	\node[anchor=south, yshift=10mm] at (current page.south) {% 
+		\begin{minipage}{\textwidth}
+			\centering
+			% 1. الشعار بحجمه الأصلي (بدون تحديد عرض)
+			\includegraphics[width = 75 pt]{figures/englogo}
+			\includegraphics[width = 45  pt]{figures/itired}
+			\par\vspace{2mm} % المسافة بين الشعار والنص
+			
+			\begin{flushleft}
+				{\small
+					This report has been prepared for academic course evaluation purposes as part of course requirements.
+					\\No part of this document may be reproduced, redistributed, or used for commercial purposes without the author's permission.\\
+					\copyright\ \the\year\ \makeatletter\@author\makeatother. All Rights Reserved.
+				}
+			\end{flushleft}
+			
+		\end{minipage}%
+	};
+\end{tikzpicture}
+
+
+\end{titlepage}

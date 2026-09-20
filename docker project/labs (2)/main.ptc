@@ -1,0 +1,10 @@
+\babel@toc {english}{}\relax 
+\ttl@starttoc {sections@1}
+\contentsline {chapter}{\numberline {1}Main project}{2}{chapter.1}%
+\contentsline {section}{Cloning the project repo}{2}{section*.2}%
+\contentsline {section}{Building the images}{3}{section*.4}%
+\contentsline {section}{Pushing the docker images}{4}{section*.8}%
+\contentsline {section}{Creating a network}{5}{section*.10}%
+\contentsline {section}{Running PostgreSQL}{6}{section*.12}%
+\contentsline {section}{Running the three containers}{6}{section*.14}%
+\contentsfinish 
