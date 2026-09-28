@@ -105,7 +105,7 @@ Any computer network consists of two main parts:
 	\begin{itemize}
 		\item VIMIN 2-Port Outdoor PoE Gigabit Extender
 		\item Revotech 2 Port POE Extender
-		\item 
+		\item TP-Link RE305 AC1200 Wi-Fi Range Extender
 	\end{itemize}
 \end{minipage}%
 \hfill
@@ -123,6 +123,10 @@ Any computer network consists of two main parts:
 	\subsection{Access point}
 	It can be considered a converter that transforms a wired signal into a wireless one, allowing devices to connect to a wired LAN network via Wi-Fi.
 	\subsubsection{Examples}
+	\begin{itemize}
+		\item Ubiquiti UniFi AC Pro
+		\item TP-Link EAP225 Omada
+	\end{itemize}
 \end{minipage}%
 \hfill
 \begin{minipage}[r]{0.40\textwidth}
@@ -139,6 +143,10 @@ Any computer network consists of two main parts:
 	\subsection{Router}
 	A device that allows communication between networks and enables communication with the network that carries the internet.
 	\subsubsection{Examples}
+	\begin{itemize}
+		\item Cisco RV340 Dual WAN Gigabit Router
+		\item ASUS RT-AX88U AX6000 WiFi 6 Router
+	\end{itemize}
 \end{minipage}%
 \hfill
 \begin{minipage}[r]{0.40\textwidth}
@@ -163,6 +171,10 @@ Any computer network consists of two main parts:
 		Wireless and USB based
 	\end{enumerate}
 	\subsubsection{Examples}
+	\begin{itemize}
+		\item Intel I350-T2 Gigabit Ethernet NIC
+		\item TP-Link TL-WN725N USB Wi-Fi Adapter
+	\end{itemize}
 \end{minipage}%
 \hfill
 \begin{minipage}[r]{0.40\textwidth}
@@ -175,11 +187,11 @@ Any computer network consists of two main parts:
 		\label{NIC}
 	\end{figure}
 \end{minipage}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{minipage}[c]{0.6\textwidth}
 	\subsection{Mac address}
-	physical and unique address over the world burned on the
-	NIC card.
+	A physical and globally unique hardware identifier assigned to a Network Interface Card (NIC) at the manufacturing stage. It operates at the Data Link Layer (Layer 2) of the OSI model and consists of a 48-bit (6-byte) hexadecimal address used to facilitate local frame delivery within the same network segment.
 \end{minipage}%
 \hfill
 \begin{minipage}[r]{0.40\textwidth}
@@ -192,24 +204,210 @@ Any computer network consists of two main parts:
 	\end{figure}
 \end{minipage}
 
-\subsection{IP address}
-logical address, identify each device on an IP network layer.
-\begin{figure}[!h]
-	\centering
-	\includegraphics[width=0.5\linewidth]{figures/IP1}
-	\caption{IP address}
-	\label{fig:ip1}
-\end{figure}
+\hfill
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{IP address}
+	A logical layer 3 network address assigned to identify devices and route traffic across interconnected networks. It exists in two main formats: IPv4 (32-bit address space, e.g., 192.168.1.1) and IPv6 (128-bit address space to prevent IP exhaustion). It is divided into Network ID and Host ID portions, allowing packets to be properly routed across public and private subnets.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{figures/IP1}
+		\caption{IP address}
+		\label{fig:ip1}
+	\end{figure}
+\end{minipage}
 
+
+
+\newpage
 
 \subsection{Protocols}
-Communication rules that all entity must agree onhttp –https-FTP-
-RDP
+A standardized set of rules and conventions that govern data formatting, transmission, and error handling between network entities across different layers:
+\begin{itemize}
+	\item \textbf{HTTP/HTTPS:} Web browsing protocols (HTTPS adds SSL/TLS encryption for secure data transfer).
+	\item \textbf{FTP:} File Transfer Protocol used for uploading and downloading files over a client-server architecture.
+	\item \textbf{RDP:} Remote Desktop Protocol allowing users to visually control a computer remotely over a network connection.
+\end{itemize}
 \begin{figure}[!h]
 	\centering
 	\includegraphics[width=0.7\linewidth]{figures/protocols1}
 	\caption{TCP/IP model}
 	\label{fig:protocols1}
 \end{figure}
+
+\noindent\rule{\textwidth}{0.4pt}
+\section{Network Classifications}
+\begin{figure}[H]
+	\centering
+	\begin{tikzpicture}[
+		node distance = 1.2cm and 0.6cm,
+		% نمط العنوان الرئيسي في المنتصف
+		titlebox/.style = {
+			draw=black,
+			fill=black,
+			text=white,
+			font=\bfseries\Large,
+			align=center,
+			rounded corners=8pt,
+			inner sep=12pt,
+			minimum width=8cm,
+			drop shadow
+		},
+		% نمط الصناديق الفرعية الثلاثة
+		itembox/.style = {
+			draw=black,
+			fill=white,
+			thick,
+			rounded corners=6pt,
+			align=center,
+			inner sep=10pt,
+			minimum width=4.5cm,
+			minimum height=2cm,
+			font=\small
+		},
+		% نمط الأسهم الموجهة
+		arrowstyle/.style = {
+			-Stealth,
+			thick,
+			color=black,
+			line width=1.5pt
+		}
+		]
+		
+		% 1. العنوان الرئيسي في المنتصف فوق
+		\node (title) [titlebox] {Network Classifications};
+		
+		% 2. العناصر الثلاثة تحت العنوان (العنصر الأوسط تحت العنوان مباشرة، والآخران على جانبيه)
+		\node (item2) [itembox, below=of title] {
+			\textbf{\color{black} According to network topology}\\[0.5em]
+			\textit{How the computers are connected?}
+		};
+		
+		\node (item1) [itembox, left=of item2] {
+			\textbf{\color{black} According to Covered Area}\\[0.5em]
+			\textit{How large is the network?}
+		};
+		
+		\node (item3) [itembox, right=of item2] {
+			\textbf{\color{black} According to network model}\\[0.5em]
+			\textit{What type of model?}
+		};
+		
+		% 3. رسم الأسهم المنحنية (Curved Arrows)
+		\draw [arrowstyle] (title.south west) to[out=210, in=90] (item1.north);
+		\draw [arrowstyle] (title.south) -- (item2.north);
+		\draw [arrowstyle] (title.south east) to[out=330, in=90] (item3.north);
+		
+	\end{tikzpicture}
+\end{figure}
+
+\subsection{According to Covered Area}
+
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsubsection{Personal Area Networks (PAN)}
+	a computer network for interconnecting
+	devices centered on an individual person's
+	workspace.
+	
+	provides data transmission among
+	devices such as computers, smartphones,
+	tablets and personal digital assistants
+	\subsubsection{Examples}
+	\begin{itemize}
+		\item Connecting a smartphone to a smartwatch via Bluetooth.
+		\item Connecting wireless Bluetooth earbuds to a laptop.
+		\item Transferring files between two phones using Wi-Fi Direct or AirDrop.
+		\item Connecting a wireless mouse or keyboard to a computer using a USB dongle.
+	\end{itemize}
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{figures/PAN}
+		\caption{PAN Network}
+		\label{PAN}
+	\end{figure}
+\end{minipage}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsubsection{Local Area Networks (LAN)}
+	a computer network that interconnects computers within a limited area such as a residence, school, laboratory, university campus or office building.
+	
+	provides high data transfer rates, low latency, and secure communication among connected devices like PCs, servers, and network printers.
+	\subsubsection{Examples}
+	\begin{itemize}
+		\item A home Wi-Fi network connecting PCs, smart TVs, and phones.
+		\item An office network connecting workstations to a central server and shared printer.
+		\item A computer lab in a school linked via Ethernet switches.
+		\item Interconnected devices in a university building sharing local resources.
+	\end{itemize}
+\end{minipage}%
+\hfill 
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{figures/LAN}
+		\caption{LAN Network}
+		\label{LAN}
+	\end{figure}
+\end{minipage}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsubsection{Metropolitan Area Networks (MAN)}
+	a computer network that covers a larger geographic area than a LAN, spanning an entire city or a large town.
+	
+	provides high-speed connectivity to bridge multiple LANs across a town or city, typically managed by a single entity or service provider.
+	\subsubsection{Examples}
+	\begin{itemize}
+		\item A city-wide cable television network delivering broadband internet.
+		\item A municipal network connecting various government offices across a city.
+		\item A university campus network connecting separate branch buildings across town.
+		\item A local bank branch network connected to a city headquarters.
+	\end{itemize}
+\end{minipage}%
+\hfill 
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{figures/MAN}
+		\caption{MAN Network}
+		\label{MAN}
+	\end{figure}
+\end{minipage}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsubsection{Wide Area Networks (WAN)}
+	a telecommunications network that extends over a large geographic distance, often crossing cities, countries, or continents.
+	
+	provides long-distance data transmission, connecting multiple smaller networks (LANs and MANs) together using public or private transport systems.
+	\subsubsection{Examples}
+	\begin{itemize}
+		\item The global Internet connecting millions of devices worldwide.
+		\item A multinational corporation linking offices in different countries via VPN.
+		\item ATM networks of a national bank connected across multiple regions.
+		\item Cloud infrastructure interconnecting international data centers.
+	\end{itemize}
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{figures/WAN}
+		\caption{WAN Network}
+		\label{WAN}
+	\end{figure}
+\end{minipage}
+
+
+
 
 
