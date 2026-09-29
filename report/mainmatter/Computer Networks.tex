@@ -406,7 +406,202 @@ A standardized set of rules and conventions that govern data formatting, transmi
 		\label{WAN}
 	\end{figure}
 \end{minipage}
+\newpage
+\subsection{According to Network Topology}
+Refers to the shape of a network, or the network's layout.
 
+
+\subsubsection{Types}
+\begin{itemize}
+	\item \textbf{Physical Topology:} how computers connected to each other physically (wired)
+	\item \textbf{Logical Topology:} how to send message from device to other, (the way in which to the generated signal actual path across the network).
+\end{itemize}
+
+\subsubsection{Dependent on :}
+\begin{itemize}
+	\item \textbf{Type and number of equipment being used}
+	\item \textbf{Cost}
+\end{itemize}
+
+Each topology has its own advantages and disadvantages.
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsubsection{Ring Topology}
+	\textbf{Definition:} A network topology where each device is connected to exactly two other devices, forming a single continuous closed loop for signals.
+	
+	\textbf{Connection Method:} Nodes are linked sequentially in a ring. Data travels from node to node in one direction, with each node passing the signal along until it reaches its destination.
+	
+	\textbf{Advantages:}
+	\begin{itemize}
+		\item Data flows in a single direction, significantly reducing the chance of packet collisions.
+		\item No central server is needed to manage connectivity or control access to the network.
+	\end{itemize}
+	
+	\textbf{Disadvantages:}
+	\begin{itemize}
+		\item A single cable break or node failure brings down the entire network.
+		\item Difficult to troubleshoot, and adding or removing devices disrupts the entire network.
+	\end{itemize}
+\end{minipage}%
+\hfill 
+\begin{minipage}[r]{0.40\textwidth}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{figures/RingTopology}
+		\caption{Ring Topology}
+		\label{RingTopology}
+	\end{figure}
+\end{minipage}
+
+\vspace{0.5cm}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsubsection{Ring LAN}
+	\textbf{Definition:} A Local Area Network implementation that utilizes ring architecture, most notably the Token Ring protocol.
+	
+	\textbf{Connection Method:} Devices physically connect to a central Multistation Access Unit (MAU) in a star wiring pattern, but logically operate as a ring where a data "token" is passed sequentially.
+	
+	\textbf{Advantages:}
+	\begin{itemize}
+		\item Predictable network delays and token-passing eliminates data collisions entirely.
+		\item All workstations have equal and fair access to network resources.
+	\end{itemize}
+	
+	\textbf{Disadvantages:}
+	\begin{itemize}
+		\item Much slower performance compared to modern Ethernet networks.
+		\item The specialized hardware (like MAUs) is outdated and expensive to maintain.
+	\end{itemize}
+\end{minipage}%
+\hfill 
+\begin{minipage}[r]{0.40\textwidth}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{figures/RingLAN}
+		\caption{Ring LAN}
+		\label{RingLAN}
+	\end{figure}
+\end{minipage}
+
+\vspace{0.5cm}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsubsection{Dual Ring Topology}
+	\textbf{Definition:} A network topology that consists of two concentric rings connecting the same set of devices, designed to provide redundancy.
+	
+	\textbf{Connection Method:} Devices connect to a primary ring for data transmission and a secondary backup ring that carries data in the opposite direction.
+	
+	\textbf{Advantages:}
+	\begin{itemize}
+		\item Excellent fault tolerance; if the primary ring fails, the secondary ring immediately takes over.
+		\item Capable of handling higher speeds and heavier network traffic.
+	\end{itemize}
+	
+	\textbf{Disadvantages:}
+	\begin{itemize}
+		\item Requires double the amount of cabling and specialized dual-port network cards.
+		\item More expensive and highly complex to install and configure.
+	\end{itemize}
+\end{minipage}%
+\hfill 
+\begin{minipage}[r]{0.40\textwidth}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{figures/DualRingTopology}
+		\caption{Dual Ring Topology}
+		\label{DualRingTopology}
+	\end{figure}
+\end{minipage}
+
+\vspace{0.5cm}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsubsection{Mesh Topology}
+	\textbf{Definition:} A network setup where devices are heavily interconnected with one another, creating multiple paths for data.
+	
+	\textbf{Connection Method:} Uses point-to-point links. In a full mesh, every single node connects directly to every other node. In a partial mesh, only some nodes have multiple connections.
+	
+	\textbf{Advantages:}
+	\begin{itemize}
+		\item Extreme reliability and robustness; the failure of one link does not stop data transmission.
+		\item High security and privacy since data travels on dedicated point-to-point paths.
+	\end{itemize}
+	
+	\textbf{Disadvantages:}
+	\begin{itemize}
+		\item The most expensive topology due to the massive amount of cabling and networking ports required.
+		\item Extremely complex to install, configure, and maintain.
+	\end{itemize}
+\end{minipage}%
+\hfill 
+\begin{minipage}[r]{0.40\textwidth}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{figures/MeshTopology}
+		\caption{Mesh Topology}
+		\label{MeshTopology}
+	\end{figure}
+\end{minipage}
+
+\vspace{0.5cm}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsubsection{Star Topology}
+	\textbf{Definition:} The most common network topology where every device connects to a central networking unit, such as a switch or hub.
+	
+	\textbf{Connection Method:} Each node has its own dedicated cable connecting directly to the central device, which acts as a conduit to transmit messages across the network.
+	
+	\textbf{Advantages:}
+	\begin{itemize}
+		\item Easy to install, manage, and expand without disrupting the rest of the network.
+		\item A failure in one cable or node only affects that specific device, keeping the rest of the network intact.
+	\end{itemize}
+	
+	\textbf{Disadvantages:}
+	\begin{itemize}
+		\item The central device is a single point of failure; if it crashes, the entire network goes down.
+		\item Requires significantly more cabling than a linear bus topology.
+	\end{itemize}
+\end{minipage}%
+\hfill 
+\begin{minipage}[r]{0.40\textwidth}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{figures/StarTopology}
+		\caption{Star Topology}
+		\label{StarTopology}
+	\end{figure}
+\end{minipage}
+
+\vspace{0.5cm}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsubsection{Hybrid Topology}
+	\textbf{Definition:} A complex network architecture that combines two or more different standard topologies to leverage their collective strengths.
+	
+	\textbf{Connection Method:} Links different topological segments together using devices like routers or bridges. A common example is connecting multiple star networks via a main bus backbone.
+	
+	\textbf{Advantages:}
+	\begin{itemize}
+		\item Extremely flexible, adaptable, and easily scalable for large organizations.
+		\item Can be customized to meet the specific requirements and layout of different departments.
+	\end{itemize}
+	
+	\textbf{Disadvantages:}
+	\begin{itemize}
+		\item The most complex topology to design, implement, and troubleshoot.
+		\item Hardware, cabling, and management infrastructure costs are very high.
+	\end{itemize}
+\end{minipage}%
+\hfill 
+\begin{minipage}[r]{0.40\textwidth}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.7\linewidth]{figures/HybridTopology}
+		\caption{Hybrid Topology}
+		\label{HybridTopology}
+	\end{figure}
+\end{minipage}
 
 
 
