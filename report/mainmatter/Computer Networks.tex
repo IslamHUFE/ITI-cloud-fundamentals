@@ -604,9 +604,90 @@ Each topology has its own advantages and disadvantages.
 \end{minipage}
 
 \subsection{According to Network Model}
-\subsubsection{Peer-to-Peer Networks}
+\begin{minipage}[c]{0.6\textwidth}
+	\subsubsection{Peer-to-Peer Networks}
+	\textbf{Definition:} A decentralized network architecture where each connected computer (peer) has equal capabilities and responsibilities, acting as both a client and a server.
+	
+	\textbf{Architecture:} Computers connect directly to one another to share files, hardware, and network resources without relying on a central server.
+	
+	\textbf{Advantages:}
+	\begin{itemize}
+		\item Easy and cost-effective to design and set up without requiring dedicated server hardware or complex management software.
+		\item High fault tolerance with no single point of failure; if one node fails, the rest of the network remains fully functional.
+	\end{itemize}
+	
+	\textbf{Disadvantages:}
+	\begin{itemize}
+		\item Decentralized structure makes managing data backup, user access, and network security difficult.
+		\item Overall performance can degrade as the number of connected devices and shared resources increases.
+	\end{itemize}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.38\textwidth}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\linewidth]{figures/PeerToPeerNetwork}
+		\caption{Peer-to-Peer Network}
+		\label{fig:PeerToPeerNetwork}
+	\end{figure}
+\end{minipage}
+
+\vspace{1.5em}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsubsection{Client/Server Networks}
+	\textbf{Definition:} A centralized network architecture where dedicated servers manage resources, security, and services for multiple client devices that request them.
+	
+	\textbf{Architecture:} Client systems send requests across the network to centralized servers (such as file, web, or database servers), which process and respond to those requests.
+	
+	\textbf{Advantages:}
+	\begin{itemize}
+		\item Centralized administration allows efficient data backups, software deployment, and consistent security policies.
+		\item Highly scalable and designed to efficiently handle heavy traffic and large numbers of nodes.
+	\end{itemize}
+	
+	\textbf{Disadvantages:}
+	\begin{itemize}
+		\item High implementation and maintenance costs for dedicated server hardware, software licenses, and IT administration.
+		\item The central server acts as a single point of failure; if it crashes, clients lose access to central resources.
+	\end{itemize}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.38\textwidth}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.85\linewidth]{figures/ClientServerNetwork}
+		\caption{Client/Server Network}
+		\label{fig:ClientServerNetwork}
+	\end{figure}
+\end{minipage}
 
 
+\setlength{\arrayrulewidth}{1.5pt}
+\arrayrulecolor{white} % خطوط فاصلة بيضاء
 
-
-
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	
+	% هذا الأمر يضيف العنوان ويدرج الجدول تلقائياً في \listoftables
+	
+	\label{tab:p2p_vs_clientserver} % للإشارة للجدول داخل النص باستخدام \ref{tab:p2p_vs_clientserver}
+	
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		& \textcolor{white}{\textbf{Peer to peer}} & \textcolor{white}{\textbf{Client/server}} \\ \hline
+		\rowcolor{TableLightBlue}
+		Centralization & Local machine no central server & All client machines connect to central server to get service \\ \hline
+		\rowcolor{TableLightBlue}
+		Storage & Each machine share its files equally with the others & All files and folders are on dedicated storage on the server and client access their files based on database on the server \\ \hline
+		\rowcolor{TableLightBlue}
+		Cost & inexpensive & Expensive because of server OS license \\ \hline
+		\rowcolor{TableLightBlue}
+		scalable & In home or small office & Medium/large enterprise \\ \hline
+		\rowcolor{TableLightBlue}
+		Operating system & Client operating system & Server operating system to handle multiple requests \\ \hline
+	\end{tabularx}
+	\caption{Comparison between Peer-to-Peer and Client/Server models}
+\end{table}
