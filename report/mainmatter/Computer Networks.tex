@@ -694,23 +694,17 @@ Each topology has its own advantages and disadvantages.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%  الملف ده فيه الإضافات بس، مش الشابتر كله.
-%  PART A (A1, A2, A3): أجزاء صغيرة بتتحط في أماكنها جوه الكود القديم.
-%  PART B: الباقي كله، بيتلزق في آخر الملف بعد جدول
-%          "Comparison between Peer-to-Peer and Client/Server models".
+%  الصق الكود ده بعد جدول "Comparison between Peer-to-Peer and Client/Server models"
+%  (امسح كل اللي بعد الجدول ده في الملف القديم واستبدله بالكود ده)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                PART A1
-%  حطه بعد minipage بتاعة WAN مباشرة (قبل \newpage اللي قبل Topology)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{The Internet (WWW)}
 
 \begin{minipage}[c]{0.6\textwidth}
-	\subsubsection{Internet (WWW)}
-	The Internet is a \textbf{global mesh of interconnected networks}. The most used service on the Internet is the \textbf{World Wide Web (WWW)}.
+	The Internet is a \textbf{global mesh of interconnected networks}, and its most used service is the \textbf{World Wide Web (WWW)}.
 	
-	No one actually owns the Internet. Many organizations, ISPs, companies, and governments own pieces of the Internet infrastructure, while its standards and naming are coordinated by:
+	No one owns the Internet; its infrastructure is owned by many ISPs, companies, and governments, while its standards and naming are coordinated by:
 	\begin{itemize}
 		\item \textbf{ISOC:} Internet Society
 		\item \textbf{IETF:} Internet Engineering Task Force
@@ -728,247 +722,23 @@ Each topology has its own advantages and disadvantages.
 	\end{figure}
 \end{minipage}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                PART A2
-%  حطه بعد minipage بتاعة Mesh Topology
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\vspace{0.3cm}
-\noindent\textbf{Number of cables in a full mesh:} the amount of cables needed can be calculated by
-\[
-CN = \frac{D \times (D-1)}{2}
-\]
-where $CN$ is the number of cables needed and $D$ is the number of devices on the network. For example, a full mesh of 6 devices needs $\frac{6 \times 5}{2} = 15$ cables.
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                PART A3
-%  حطه بعد minipage بتاعة Star Topology
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\vspace{0.3cm}
-\noindent\textbf{Types of Star Topology:}
-\begin{itemize}
-	\item \textbf{Hubbed Star (Broadcast Star):} the central node is a hub that broadcasts every frame to all ports. It is a physical star but logically a bus, so only one station can transmit at a time.
-	\item \textbf{Switched Star:} the central node is a switch that acts as a frame switch and retransmits each frame only to its destination.
-\end{itemize}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.35\linewidth]{figures/HubbedStar}
-	\hspace{1cm}
-	\includegraphics[width=0.35\linewidth]{figures/SwitchedStar}
-	\caption{Hubbed star (left) and switched star (right)}
-	\label{StarTypes}
-\end{figure}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                                PART B
-%  بيتلزق في آخر الملف
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newpage
-\section{Building the Network}
-To build a simple network we need the hardware and software elements described earlier: end devices (PCs, laptops, printers, IP phones, servers), network devices (switches, routers, Wi-Fi access points), and a medium that connects them. Each wired device connects to the network through a \textbf{NIC} using an \textbf{RJ-45 connector}.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.85\linewidth]{figures/SimpleNetwork}
-	\caption{A simple network}
-	\label{SimpleNetwork}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.6\linewidth]{figures/NetworkElementsHW}
-	\caption{RJ-45 connector and Network Interface Card}
-	\label{NetworkElementsHW}
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Network Protocols and Reference Models}
-
-\subsection{Why Do We Need Protocols?}
-\begin{itemize}
-	\item To communicate efficiently.
-	\item To enable data to flow from one NIC to another.
-	\item To control the messages and the quantity of messages in the network.
-\end{itemize}
-
-\subsection{OSI Reference Model}
-\textbf{OSI} (Open Systems Interconnection) was defined by the \textbf{ISO} in 1983. It gives developers universal concepts so they can develop protocols, and it breaks the communication process into \textbf{layers}.
-
-\subsubsection{Why a Layered Network Model?}
-\begin{itemize}
-	\item \textbf{Reduces complexity:} makes troubleshooting easier.
-	\item \textbf{Standardizes interfaces:} allows multi-vendor equipment to work together.
-	\item \textbf{Layer separation:} changes in one layer do not affect the other layers.
-	\item \textbf{Simplifies teaching and learning.}
-\end{itemize}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.75\linewidth]{figures/OSIModel}
-	\caption{OSI model (7 layers)}
-	\label{OSIModel}
-\end{figure}
-
-\subsubsection{The Seven Layers}
-
-\setlength{\arrayrulewidth}{1.5pt}
-\arrayrulecolor{white}
-
-\begin{table}[h!]
-	\centering
-	\renewcommand{\arraystretch}{1.4}
-	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{0.8cm}|>{\raggedright\arraybackslash}p{2.4cm}|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}X|}
-		\hline
-		\rowcolor{TableCyan}
-		\textcolor{white}{\textbf{No.}} & \textcolor{white}{\textbf{Layer}} & \textcolor{white}{\textbf{Data unit}} & \textcolor{white}{\textbf{Main functions}} \\ \hline
-		\rowcolor{TableLightBlue}
-		7 & Application & Data & Interface to end users; provides network services such as file transfer, network management and e-mail (HTTP, FTP, SMTP, POP3, Telnet/SSH). Example: web browser. \\ \hline
-		\rowcolor{TableLightBlue}
-		6 & Presentation & Data & Finds a common presentation between source and destination, formats and structures data, negotiates the data transfer syntax (encoding and decoding), and provides encryption. \\ \hline
-		\rowcolor{TableLightBlue}
-		5 & Session & Data & Establishes, manages and terminates sessions (dialogues) between cooperating applications; provides synchronization by adding checkpoints into the data stream. \\ \hline
-		\rowcolor{TableLightBlue}
-		4 & Transport & Segments & Organizes data into segments; reliable end-to-end transport between source and destination hosts, with error recovery and flow control. \\ \hline
-		\rowcolor{TableLightBlue}
-		3 & Network & Packets (datagrams) & Logical (IP) addressing and routing; finds the best path to the destination (end-to-end addressing). \\ \hline
-		\rowcolor{TableLightBlue}
-		2 & Data Link & Frames & Reliable data transfer across a physical link; organizes data into frames, checks frames for errors, hop-to-hop (MAC) addressing. \\ \hline
-		\rowcolor{TableLightBlue}
-		1 & Physical & Bits & Transmission of the unstructured bit stream over the physical link; defines the mechanical and electrical specifications of the interface and the transmission media (cables and connectors). \\ \hline
-	\end{tabularx}
-	\caption{Functions of the OSI layers}
-	\label{tab:osilayers}
-\end{table}
-
-\subsection{Data Encapsulation and De-Encapsulation}
-When the sender transmits data, each layer from the application down to the physical layer \textbf{adds its own header} (HDR) to the user data; this process is called \textbf{encapsulation}. The data link layer also adds a trailer called the \textbf{FCS} (Frame Check Sequence), which is used for error detection. At the receiver the opposite process, \textbf{de-encapsulation}, takes place: each layer removes its header and passes the data up to the next layer until the user data reaches the application.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.95\linewidth]{figures/Encapsulation}
-	\caption{Data encapsulation and de-encapsulation}
-	\label{Encapsulation}
-\end{figure}
-
-\subsection{Peer-to-Peer Communication}
-Each layer at the sender communicates logically with the \textbf{same layer} at the receiver. The data unit exchanged between peer layers is called segments at the transport layer, packets at the network layer, frames at the data link layer, and bits at the physical layer.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.85\linewidth]{figures/PeerToPeerCommunication}
-	\caption{Peer-to-peer communication between layers}
-	\label{PeerToPeerCommunication}
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-\section{TCP/IP Protocol Suite}
-\textbf{TCP/IP} (Transmission Control Protocol / Internet Protocol) is the protocol suite used by the Internet. Its main characteristics are:
-\begin{itemize}
-	\item \textbf{Open standard protocol} and \textbf{not tied to one vendor}.
-	\item \textbf{Cross platform:} the default protocol for all modern operating systems (Microsoft and Linux).
-	\item \textbf{Direct access to the Internet:} TCP/IP is the Internet protocol. The Internet currently uses IPv4, and the next version is IPv6.
-	\item \textbf{Routable.}
-\end{itemize}
-
-\subsection{TCP/IP vs. OSI Model}
-The TCP/IP model has fewer layers than OSI: the application, presentation, and session layers of OSI are combined into one \textbf{Application} layer, while the data link and physical layers form the \textbf{Network Access} layer.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\linewidth]{figures/TCPIPvsOSI}
-	\caption{TCP/IP model compared to the OSI model}
-	\label{TCPIPvsOSI}
-\end{figure}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\linewidth]{figures/TCPIPArchitecture}
-	\caption{Some protocols in the TCP/IP suite}
-	\label{TCPIPArchitecture}
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Network Access Layer}
+\section{Network Reference Models}
 
 \begin{minipage}[c]{0.6\textwidth}
-	\subsubsection{Physical Layer}
-	\begin{itemize}
-		\item Defines the electrical characteristics and the transmission medium.
-		\item Handles the movement of individual \textbf{bits} from one node to the next.
-	\end{itemize}
-	\subsubsection{Data Link Layer}
-	\begin{itemize}
-		\item Logical interface between the end system and the network.
-		\item Organizes data into \textbf{frames} and uses \textbf{MAC} (Media Access Control) addressing.
-		\item Hop-to-hop addressing.
-		\item Error detection mechanism (detects damaged or lost frames) and error notification.
-	\end{itemize}
+	\subsection{OSI Model}
+	Defined by the \textbf{ISO} in 1983, the OSI (Open Systems Interconnection) model breaks the communication process into \textbf{7 layers}. Layering reduces complexity, lets multi-vendor equipment work together, and keeps a change in one layer from affecting the others.
 \end{minipage}%
 \hfill
 \begin{minipage}[r]{0.40\textwidth}
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.9\linewidth]{figures/PhysicalLayer}
-		\caption{Physical layer}
-		\label{PhysicalLayer}
+		\includegraphics[width=0.8\linewidth]{figures/OSIModel}
+		\caption{OSI model}
+		\label{OSIModel}
 	\end{figure}
 \end{minipage}
-
-\subsubsection{Physical Addresses (MAC)}
-\begin{itemize}
-	\item The physical address is burned on the NIC and is unique over the world.
-	\item It is 48 bits (6 bytes) written as 12 hexadecimal digits; every byte (2 hexadecimal digits) is separated by a colon.
-	\item The first half is the \textbf{OUI} (Organizationally Unique Identifier) that identifies the manufacturer, and the second half is the device (extended) identifier.
-\end{itemize}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.6\linewidth]{figures/MACFormat}
-	\caption{MAC address format}
-	\label{MACFormat}
-\end{figure}
-
-Physical addresses can be used for three types of transmission:
-\begin{itemize}
-	\item \textbf{Unicast:} one sender to one receiver.
-	\item \textbf{Multicast:} one sender to a group of receivers.
-	\item \textbf{Broadcast:} one sender to all devices on the network.
-\end{itemize}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.55\linewidth]{figures/CastTypes}
-	\caption{Unicast, broadcast and multicast}
-	\label{CastTypes}
-\end{figure}
-
-To check your physical address use the commands \texttt{ipconfig /all} or \texttt{getmac}.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
-\subsection{Internet (Network) Layer}
-The Internet layer (IP layer) provides:
-\begin{itemize}
-	\item \textbf{Connectivity and path selection} between two hosts (source to destination).
-	\item \textbf{Routing of data:} a mechanism to transmit data over independent networks that are linked together.
-	\item \textbf{Logical addressing:} IPv4 and IPv6.
-\end{itemize}
-
-\subsubsection{Internet Protocol Version 4 (IPv4)}
-\begin{itemize}
-	\item Uniquely identifies each device on an IP network layer; sometimes called the \textbf{logical address}.
-	\item Every host (computer, networking device, peripheral) must have a unique address on the same network.
-	\item The IP address is 32 bits divided into 4 octets of 8 bits each; each octet represents a value from 0 to 255 and the octets are separated by dots.
-	\item The address space of IPv4 is $2^{32} = 4{,}294{,}967{,}296$ addresses.
-\end{itemize}
 
 \setlength{\arrayrulewidth}{1.5pt}
 \arrayrulecolor{white}
@@ -976,86 +746,106 @@ The Internet layer (IP layer) provides:
 \begin{table}[h!]
 	\centering
 	\renewcommand{\arraystretch}{1.4}
-	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{4.5cm}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+	\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{0.8cm}|>{\raggedright\arraybackslash}p{2.4cm}|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}X|}
 		\hline
 		\rowcolor{TableCyan}
-		& \textcolor{white}{\textbf{Octet 1}} & \textcolor{white}{\textbf{Octet 2}} & \textcolor{white}{\textbf{Octet 3}} & \textcolor{white}{\textbf{Octet 4}} \\ \hline
+		\textcolor{white}{\textbf{No.}} & \textcolor{white}{\textbf{Layer}} & \textcolor{white}{\textbf{Data unit}} & \textcolor{white}{\textbf{Main function}} \\ \hline
 		\rowcolor{TableLightBlue}
-		32-bit binary number (divided into four 8-bit octets) & 10101100 & 00010000 & 10000000 & 00010001 \\ \hline
+		7 & Application & Data & Interface to the end user (HTTP, FTP, SMTP) \\ \hline
 		\rowcolor{TableLightBlue}
-		Each octet converted to decimal & 172 & 16 & 128 & 17 \\ \hline
+		6 & Presentation & Data & Data formatting, encoding, and encryption \\ \hline
 		\rowcolor{TableLightBlue}
-		Dotted decimal notation & 172. & 16. & 128. & 17 \\ \hline
+		5 & Session & Data & Establishes, manages, and terminates sessions \\ \hline
+		\rowcolor{TableLightBlue}
+		4 & Transport & Segments & Reliable end-to-end delivery, error recovery, flow control \\ \hline
+		\rowcolor{TableLightBlue}
+		3 & Network & Packets & Logical (IP) addressing and routing \\ \hline
+		\rowcolor{TableLightBlue}
+		2 & Data Link & Frames & Hop-to-hop (MAC) addressing and error detection \\ \hline
+		\rowcolor{TableLightBlue}
+		1 & Physical & Bits & Transmission of raw bits over the medium \\ \hline
 	\end{tabularx}
-	\caption{Example of an IPv4 address (172.16.128.17)}
-	\label{tab:ipv4example}
+	\caption{Functions of the OSI layers}
+	\label{tab:osilayers}
 \end{table}
 
-\paragraph{IP Address Classes.}
-The class of an address is determined by the first octet. In class A the first bit is fixed (\texttt{0}), in class B the first two bits are fixed (\texttt{10}), and in class C the first three bits are fixed (\texttt{110}). The addresses \texttt{127.0.0.0} to \texttt{127.255.255.255} cannot be assigned to hosts and are reserved for \textbf{loopback} testing.
+\begin{minipage}[c]{0.6\textwidth}
+	\subsubsection{Encapsulation}
+	When sending, each layer \textbf{adds its own header} to the data on its way down to the physical layer (the data link layer also adds a trailer called the \textbf{FCS} for error detection). The receiver performs the opposite process, \textbf{de-encapsulation}, removing one header per layer until the data reaches the application.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.95\linewidth]{figures/Encapsulation}
+		\caption{Encapsulation}
+		\label{Encapsulation}
+	\end{figure}
+\end{minipage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{TCP/IP Protocol Suite}
+
+\begin{minipage}[c]{0.6\textwidth}
+	The protocol suite used by the Internet. It is an \textbf{open standard}, \textbf{cross platform}, and \textbf{routable}. It has fewer layers than OSI: the top three OSI layers merge into one \textbf{Application} layer, and the bottom two form the \textbf{Network Access} layer.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.95\linewidth]{figures/TCPIPvsOSI}
+		\caption{TCP/IP vs. OSI}
+		\label{TCPIPvsOSI}
+	\end{figure}
+\end{minipage}
+
+\subsection{Network Access Layer}
+Covers the OSI physical and data link layers: it moves \textbf{bits} over the medium and organizes them into \textbf{frames} using \textbf{MAC} addresses. A MAC address can be used for \textbf{unicast} (one receiver), \textbf{multicast} (a group), or \textbf{broadcast} (all devices).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Internet Layer}
+Provides \textbf{path selection}, \textbf{routing}, and \textbf{logical addressing} (IPv4 and IPv6) between two hosts.
+
+\subsubsection{IPv4}
+A 32-bit address divided into 4 octets (each 0 to 255), giving $2^{32}$ addresses, e.g.\ \texttt{172.16.128.17}. The class is determined by the first octet, and \texttt{127.x.x.x} is reserved for \textbf{loopback} testing.
 
 \begin{table}[h!]
 	\centering
 	\renewcommand{\arraystretch}{1.4}
-	\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{1.6cm}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
+	\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{1.2cm}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
 		\hline
 		\rowcolor{TableCyan}
-		\textcolor{white}{\textbf{Class}} & \textcolor{white}{\textbf{Range}} & \textcolor{white}{\textbf{Default subnet mask}} & \textcolor{white}{\textbf{Network / Host}} \\ \hline
+		\textcolor{white}{\textbf{Class}} & \textcolor{white}{\textbf{Range}} & \textcolor{white}{\textbf{Default mask}} & \textcolor{white}{\textbf{Private range}} \\ \hline
 		\rowcolor{TableLightBlue}
-		A & 1.0.0.0 to 126.255.255.255 & 255.0.0.0 & N.H.H.H \\ \hline
+		A & 1.0.0.0 -- 126.255.255.255 & 255.0.0.0 & 10.0.0.0 -- 10.255.255.255 \\ \hline
 		\rowcolor{TableLightBlue}
-		B & 128.0.0.0 to 191.255.255.255 & 255.255.0.0 & N.N.H.H \\ \hline
+		B & 128.0.0.0 -- 191.255.255.255 & 255.255.0.0 & 172.16.0.0 -- 172.31.255.255 \\ \hline
 		\rowcolor{TableLightBlue}
-		C & 192.0.0.0 to 223.255.255.255 & 255.255.255.0 & N.N.N.H \\ \hline
+		C & 192.0.0.0 -- 223.255.255.255 & 255.255.255.0 & 192.168.0.0 -- 192.168.255.255 \\ \hline
 		\rowcolor{TableLightBlue}
-		D & 224.0.0.0 to 239.255.255.255 & Reserved for multicasting & -- \\ \hline
+		D & 224.0.0.0 -- 239.255.255.255 & Multicast & -- \\ \hline
 		\rowcolor{TableLightBlue}
-		E & 240.0.0.0 to 254.255.255.255 & Experimental & -- \\ \hline
+		E & 240.0.0.0 -- 255.255.255.255 & Experimental & -- \\ \hline
 	\end{tabularx}
-	\caption{IPv4 address classes (the first octet)}
+	\caption{IPv4 address classes}
 	\label{tab:ipclasses}
 \end{table}
 
-\paragraph{Public and Private IP Addresses.}
-\textbf{Public IP addresses} (real IP) are used on the Internet and are obtained in bulk from the Internet service provider, while \textbf{private IP addresses} (local IP) are used inside local networks. \textbf{NAT} (Network Address Translation) is used to translate private IP addresses into public IP addresses.
+\textbf{Public} IPs are used on the Internet, while \textbf{private} IPs are used inside local networks; \textbf{NAT} translates private addresses into public ones.
 
-\begin{table}[h!]
-	\centering
-	\renewcommand{\arraystretch}{1.4}
-	\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{1.6cm}|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
-		\hline
-		\rowcolor{TableCyan}
-		\textcolor{white}{\textbf{Class}} & \textcolor{white}{\textbf{Public IP ranges}} & \textcolor{white}{\textbf{Private IP ranges}} \\ \hline
-		\rowcolor{TableLightBlue}
-		A & 1.0.0.0 to 9.255.255.255 \newline 11.0.0.0 to 126.255.255.255 & 10.0.0.0 to 10.255.255.255 \\ \hline
-		\rowcolor{TableLightBlue}
-		B & 128.0.0.0 to 172.15.255.255 \newline 172.32.0.0 to 191.255.255.255 & 172.16.0.0 to 172.31.255.255 \\ \hline
-		\rowcolor{TableLightBlue}
-		C & 192.0.0.0 to 192.167.255.255 \newline 192.169.0.0 to 223.255.255.255 & 192.168.0.0 to 192.168.255.255 \\ \hline
-	\end{tabularx}
-	\caption{Public and private IP address ranges}
-	\label{tab:publicprivate}
-\end{table}
-
-\subsubsection{How to Assign an IP Address to a Device}
-An IP address can be assigned in three ways:
-\begin{itemize}
-	\item \textbf{Manually:} the administrator types the IP address, subnet mask, default gateway and DNS servers.
-	\item \textbf{Automatically using DHCP.}
-	\item \textbf{APIPA} (random address in the range \texttt{169.254.X.X}).
-\end{itemize}
+\vspace{0.3cm}
 
 \begin{minipage}[c]{0.6\textwidth}
-	\paragraph{DHCP Server.}
-	Used to assign the IP configuration \textbf{dynamically}, including:
+	\subsubsection{IP Assignment}
+	An IP address can be assigned:
 	\begin{itemize}
-		\item Host IP
-		\item Subnet mask
-		\item Default gateway
-		\item DNS server IP
-		\item Lease time
+		\item \textbf{Manually} by the administrator.
+		\item \textbf{Automatically by DHCP:} a server assigns the IP, subnet mask, gateway, and DNS dynamically through four steps known as \textbf{DORA} (Discover -- Offer -- Request -- Acknowledgment).
+		\item \textbf{APIPA:} used when no DHCP server is available; it assigns a non-routable address in the range \texttt{169.254.X.X}.
 	\end{itemize}
-	The process is known as \textbf{DORA}: \textbf{D}iscover -- \textbf{O}ffer -- \textbf{R}equest -- \textbf{A}cknowledgment.
 \end{minipage}%
 \hfill
 \begin{minipage}[r]{0.40\textwidth}
@@ -1063,109 +853,58 @@ An IP address can be assigned in three ways:
 	\begin{figure}[H]
 		\centering
 		\includegraphics[width=0.95\linewidth]{figures/DHCP}
-		\caption{DHCP (DORA) process}
+		\caption{DHCP (DORA)}
 		\label{DHCP}
 	\end{figure}
 \end{minipage}
 
-\vspace{0.5cm}
+\vspace{0.3cm}
 
 \begin{minipage}[c]{0.6\textwidth}
-	\paragraph{APIPA.}
-	\begin{itemize}
-		\item Used when \textbf{no DHCP server} is available (automatic private IP addressing).
-		\item Lets LAN users talk to each other if the DHCP fails.
-		\item It \textbf{cannot} be routed.
-		\item Range: \texttt{169.254.X.X}.
-	\end{itemize}
+	\subsubsection{IPv6}
+	A 128-bit address (about $3.4 \times 10^{38}$ addresses) written as eight groups of four hexadecimal digits, and it can be shortened, for example:
+	
+	\texttt{2001:0db8:0000:0000:0000:8a2e:0370:7334}\\
+	\hspace*{1.2cm}$=$ \texttt{2001:db8::8a2e:370:7334}
 \end{minipage}%
 \hfill
 \begin{minipage}[r]{0.40\textwidth}
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.95\linewidth]{figures/APIPA}
-		\caption{APIPA address}
-		\label{APIPA}
+		\includegraphics[width=0.9\linewidth]{figures/IPv6}
+		\caption{IPv6 configuration}
+		\label{IPv6}
 	\end{figure}
 \end{minipage}
 
-\subsubsection{Useful Commands}
-\begin{itemize}
-	\item To find your private IP: \texttt{ipconfig}, \texttt{ipconfig /all}, \texttt{ipconfig /release}, \texttt{ipconfig /renew}.
-	\item To find your real (public) IP address: visit \texttt{https://www.whatismyip.com/}.
-	\item \textbf{ICMP (Ping)} tests connectivity between hosts: \texttt{ping IP}, \texttt{ping URL}, and the options \texttt{-t} (continuous), \texttt{-n} (number of requests), \texttt{-l} (packet size).
-\end{itemize}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.6\linewidth]{figures/WhatIsMyIP}
-	\caption{Finding the public IP address}
-	\label{WhatIsMyIP}
-\end{figure}
-
-\subsubsection{Internet Protocol Version 6 (IPv6)}
-\begin{itemize}
-	\item IPv6 uses a \textbf{128-bit} address, which provides approximately $3.4 \times 10^{38}$ addresses (340 billion billion billion billion).
-	\item It is represented as eight groups of four hexadecimal digits separated by colons. The full representation may be simplified by several methods of notation, for example:
-\end{itemize}
-\begin{center}
-	\texttt{2001:0db8:0000:0000:0000:8a2e:0370:7334} \quad = \quad \texttt{2001:db8::8a2e:370:7334}
-\end{center}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.5\linewidth]{figures/IPv6}
-	\caption{IPv6 configuration window}
-	\label{IPv6}
-\end{figure}
-
-\subsubsection{Internet of Things (IoT)}
+\vspace{0.3cm}
 
 \begin{minipage}[c]{0.6\textwidth}
-	IoT aims to connect all devices to the existing Internet infrastructure. The ``things'' sense and collect data and send it to the Internet. Any device that has sensors (coffee maker, A.C., washing machine, ceiling fan, lights, etc.) can be connected to the Internet.
-	
-	\textbf{Practical applications:}
-	\begin{itemize}
-		\item Smart homes and smart cities
-		\item Energy management
-		\item Environment monitoring
-		\item Healthcare
-	\end{itemize}
+	\subsubsection{Internet of Things (IoT)}
+	Connects any device that has sensors (A.C., lights, washing machine, etc.) to the Internet to collect and send data. Applications include smart homes and cities, energy management, environment monitoring, and healthcare.
 \end{minipage}%
 \hfill
 \begin{minipage}[r]{0.40\textwidth}
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.95\linewidth]{figures/IoT}
+		\includegraphics[width=0.9\linewidth]{figures/IoT}
 		\caption{Internet of Things}
 		\label{IoT}
 	\end{figure}
 \end{minipage}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
 \subsection{Transport Layer}
-The main functions of the transport layer are:
+Provides end-to-end communication between applications through:
 \begin{itemize}
-	\item \textbf{Session multiplexing:} opening multiple sessions using UDP and TCP. For example, if you open \texttt{cisco.com} and \texttt{facebook.com} at the same time, the source machine uses one port (e.g., 49001) for the first session and another port (e.g., 49002) for the second.
-	\item \textbf{Segmentation:} dividing the data into multiple \textbf{segments} to make it easier to handle (the maximum Ethernet frame size is 1518 bytes).
-	\item \textbf{Connection oriented:} maintaining the session with acknowledgements that the data was received, then terminating the session.
-	\item \textbf{Reliability:} data correction and avoiding duplicate or out-of-order data.
+	\item \textbf{Multiplexing:} several sessions at once, each using a different \textbf{port number}.
+	\item \textbf{Segmentation:} dividing data into \textbf{segments}.
+	\item \textbf{Reliability:} acknowledgements and recovery of lost or out-of-order data (TCP only).
 \end{itemize}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.6\linewidth]{figures/TransportLayer}
-	\caption{Transport layer functions}
-	\label{TransportLayer}
-\end{figure}
-
-\subsubsection{TCP vs. UDP}
-
-\setlength{\arrayrulewidth}{1.5pt}
-\arrayrulecolor{white}
+A \textbf{socket address} is an IP address plus a port number (e.g., \texttt{200.23.56.8:69}); it identifies a specific application on a specific host. Port numbers are controlled by \textbf{ICANN}: \textbf{well-known} (0--1023), \textbf{registered} (1024--49151), and \textbf{dynamic} (49152--65535).
 
 \begin{table}[h!]
 	\centering
@@ -1173,245 +912,62 @@ The main functions of the transport layer are:
 	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
 		\hline
 		\rowcolor{TableCyan}
-		& \textcolor{white}{\textbf{TCP (Transmission Control Protocol)}} & \textcolor{white}{\textbf{UDP (User Datagram Protocol)}} \\ \hline
+		& \textcolor{white}{\textbf{TCP}} & \textcolor{white}{\textbf{UDP}} \\ \hline
 		\rowcolor{TableLightBlue}
-		Reliability & Reliable (acknowledgement) & Unreliable (best-effort delivery) \\ \hline
+		Connection & Connection oriented & Connectionless \\ \hline
 		\rowcolor{TableLightBlue}
-		Connection & Connection oriented (synchronization) & Connectionless (no notification) \\ \hline
+		Reliability & Reliable (acknowledgement and recovery) & Unreliable (best effort) \\ \hline
 		\rowcolor{TableLightBlue}
-		Duplex & Full duplex & Full duplex \\ \hline
-		\rowcolor{TableLightBlue}
-		Error control & Error checking (checksum) & Performs very limited error checking \\ \hline
-		\rowcolor{TableLightBlue}
-		Recovery & Data-recovery features & No data-recovery features \\ \hline
-		\rowcolor{TableLightBlue}
-		Used for & E-mail, file sharing, downloading & Voice streaming, video streaming \\ \hline
+		Used for & E-mail, file sharing, downloading & Voice and video streaming \\ \hline
 	\end{tabularx}
 	\caption{Comparison between TCP and UDP}
 	\label{tab:tcpudp}
 \end{table}
 
-\subsubsection{Transport Layer Addressing (Port Numbers)}
-Port numbers are controlled by \textbf{ICANN} and are divided into three ranges:
-\begin{itemize}
-	\item \textbf{Well-known ports:} permanent numbers from 0 to 1,023, assigned and controlled by ICANN.
-	\item \textbf{Registered ports:} from 1,024 to 49,151; not assigned or controlled by ICANN, but can be registered at ICANN to avoid duplication.
-	\item \textbf{Dynamic ports:} from 49,152 to 65,535; neither controlled nor registered.
-\end{itemize}
-
-\begin{table}[h!]
-	\centering
-	\renewcommand{\arraystretch}{1.4}
-	\begin{tabularx}{0.8\textwidth}{|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|}
-		\hline
-		\rowcolor{TableCyan}
-		\textcolor{white}{\textbf{Protocol}} & \textcolor{white}{\textbf{Port}} & \textcolor{white}{\textbf{Transport}} \\ \hline
-		\rowcolor{TableLightBlue}
-		FTP & 21 & TCP \\ \hline
-		\rowcolor{TableLightBlue}
-		SSH & 22 & TCP \\ \hline
-		\rowcolor{TableLightBlue}
-		Telnet & 23 & TCP \\ \hline
-		\rowcolor{TableLightBlue}
-		DNS & 53 & UDP (and TCP) \\ \hline
-		\rowcolor{TableLightBlue}
-		TFTP & 69 & UDP \\ \hline
-		\rowcolor{TableLightBlue}
-		HTTP & 80 & TCP \\ \hline
-		\rowcolor{TableLightBlue}
-		SNMP & 161 & UDP \\ \hline
-	\end{tabularx}
-	\caption{Examples of well-known port numbers}
-	\label{tab:ports}
-\end{table}
-
-\subsubsection{Socket Address}
-A \textbf{socket address} is the combination of an \textbf{IP address} and a \textbf{port number} (e.g., \texttt{200.23.56.8:69}); it identifies a specific application on a specific host.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.55\linewidth]{figures/SocketAddress}
-	\caption{Socket address}
-	\label{SocketAddress}
-\end{figure}
-
-\subsubsection{The netstat Command}
-The commands \texttt{netstat -n} and \texttt{netstat -a} are used to know the current sessions and ports on your device.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\linewidth]{figures/Netstat}
-	\caption{Output of \texttt{netstat -n}}
-	\label{Netstat}
-\end{figure}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\newpage
 \subsection{Application Layer}
-The application layer provides communication between processes or applications. The main Internet services (client / web server) are:
-\begin{itemize}
-	\item The World Wide Web: \textbf{HTTP}
-	\item Naming service: \textbf{DNS}
-	\item File transfer: \textbf{FTP}
-	\item Remote access: \textbf{Telnet / SSH / RDP}
-	\item Electronic mail: \textbf{SMTP}, \textbf{POP3}, \textbf{IMAP}
-\end{itemize}
-
-\subsubsection{URL and HTTP}
-A \textbf{URL} (Uniform Resource Locator) consists of:
-\begin{itemize}
-	\item \textbf{Protocol:} HTTP, HTTPS or FTP.
-	\item \textbf{Host:} the domain name of the computer on which the information is located.
-	\item \textbf{Port:} the URL can optionally contain the port number of the server.
-	\item \textbf{Path:} the pathname of the file where the information is located.
-\end{itemize}
-
-\textbf{HTTP} (Hyper Text Transfer Protocol) supports the delivery of web pages to the client.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\linewidth]{figures/URLHTTP}
-	\caption{URL structure and HTTP request}
-	\label{URLHTTP}
-\end{figure}
-
-\subsubsection{DNS (Domain Name System)}
-DNS is a way to translate human-readable names into IP addresses. When a client wants to reach a website it:
-\begin{enumerate}
-	\item checks its local \textbf{cache},
-	\item checks the \textbf{hosts file},
-	\item asks the \textbf{DNS server}.
-\end{enumerate}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.8\linewidth]{figures/DNS}
-	\caption{DNS resolution}
-	\label{DNS}
-\end{figure}
+Provides the network services that users and applications interact with directly.
 
 \begin{table}[h!]
 	\centering
 	\renewcommand{\arraystretch}{1.4}
-	\begin{tabularx}{0.8\textwidth}{|>{\centering\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}X|}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.6cm}|>{\centering\arraybackslash}p{1.8cm}|>{\raggedright\arraybackslash}X|}
 		\hline
 		\rowcolor{TableCyan}
-		\textcolor{white}{\textbf{Domain name}} & \textcolor{white}{\textbf{Assigned to}} \\ \hline
+		\textcolor{white}{\textbf{Protocol}} & \textcolor{white}{\textbf{Port}} & \textcolor{white}{\textbf{Function}} \\ \hline
 		\rowcolor{TableLightBlue}
-		com & Commercial organization \\ \hline
+		HTTP & 80 (TCP) & Delivers web pages to the client \\ \hline
 		\rowcolor{TableLightBlue}
-		edu & Educational institution \\ \hline
+		DNS & 53 (UDP) & Translates domain names into IP addresses \\ \hline
 		\rowcolor{TableLightBlue}
-		gov & Government organization \\ \hline
+		FTP & 21 (TCP) & Reliable file transfer between hosts \\ \hline
 		\rowcolor{TableLightBlue}
-		mil & Military group \\ \hline
+		SSH / Telnet & 22 / 23 (TCP) & Remote access (SSH is encrypted, Telnet is not) \\ \hline
 		\rowcolor{TableLightBlue}
-		net & Major network support center \\ \hline
-		\rowcolor{TableLightBlue}
-		org & Organization other than those above \\ \hline
-		\rowcolor{TableLightBlue}
-		country code & A country \\ \hline
+		SMTP, POP3, IMAP & -- & Sending e-mail (SMTP) and retrieving it (POP3 downloads, IMAP keeps it on the server) \\ \hline
 	\end{tabularx}
-	\caption{List of top-level domains (TLDs)}
-	\label{tab:tlds}
+	\caption{Main application layer protocols}
+	\label{tab:apps}
 \end{table}
 
-A hierarchy of DNS servers (local DNS server, root DNS servers, top-level domain servers, and secondary-level domain servers) contains the resource records that match names with addresses.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.85\linewidth]{figures/DNSQuery}
-	\caption{DNS query}
-	\label{DNSQuery}
-\end{figure}
-
-\subsubsection{FTP (File Transfer Protocol)}
-
 \begin{minipage}[c]{0.6\textwidth}
-	FTP is a transmission protocol that provides reliable data transfer between hosts. It uses two connections: a \textbf{control connection} on port 21 and a \textbf{data connection}. An FTP client can be:
-	\begin{itemize}
-		\item An Internet browser.
-		\item The built-in FTP client of MS Windows.
-		\item Third-party programs such as ``CuteFTP''.
-	\end{itemize}
+	\subsubsection{DNS}
+	To reach a website, the client checks its local \textbf{cache}, then the \textbf{hosts file}, and finally asks the \textbf{DNS server}, which resolves the name through a hierarchy of root, top-level domain, and secondary-level domain servers.
 \end{minipage}%
 \hfill
 \begin{minipage}[r]{0.40\textwidth}
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.95\linewidth]{figures/FTP}
-		\caption{Working principle of FTP}
-		\label{FTP}
+		\includegraphics[width=0.95\linewidth]{figures/DNS}
+		\caption{DNS resolution}
+		\label{DNS}
 	\end{figure}
 \end{minipage}
-
-\subsubsection{Telnet, SSH and RDP}
-
-\begin{minipage}[c]{0.6\textwidth}
-	\begin{itemize}
-		\item \textbf{Telnet / SSH} is a user command and an underlying TCP/IP protocol for accessing remote computers; with it an administrator can access someone else's computer remotely.
-		\item \textbf{RDP} (Remote Desktop Protocol) is a Microsoft proprietary protocol that enables remote connections to other computers with a graphical desktop.
-	\end{itemize}
-\end{minipage}%
-\hfill
-\begin{minipage}[r]{0.40\textwidth}
-	
-	\begin{figure}[H]
-		\centering
-		\includegraphics[width=0.8\linewidth]{figures/RemoteAccess}
-		\caption{Remote access}
-		\label{RemoteAccess}
-	\end{figure}
-\end{minipage}
-
-\begin{table}[h!]
-	\centering
-	\renewcommand{\arraystretch}{1.4}
-	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
-		\hline
-		\rowcolor{TableCyan}
-		\textcolor{white}{\textbf{SSH (Secure Shell)}} & \textcolor{white}{\textbf{Telnet}} \\ \hline
-		\rowcolor{TableLightBlue}
-		Runs on port 22 & Runs on port 23 \\ \hline
-		\rowcolor{TableLightBlue}
-		Very secure protocol (encrypted) & Not a secure protocol \\ \hline
-		\rowcolor{TableLightBlue}
-		Difficult to decrypt & No data encryption \\ \hline
-		\rowcolor{TableLightBlue}
-		Supported by all popular operating systems & Linux, Windows \\ \hline
-	\end{tabularx}
-	\caption{Comparison between SSH and Telnet}
-	\label{tab:sshtelnet}
-\end{table}
-
-\subsubsection{Mail Server and Clients}
-\textbf{Mail clients:}
-\begin{itemize}
-	\item \textbf{Web based:} Hotmail, Gmail.
-	\item \textbf{Non-web based:} Microsoft Outlook.
-\end{itemize}
-
-\textbf{Mail protocols:}
-\begin{itemize}
-	\item \textbf{SMTP} (Simple Mail Transfer Protocol): sends messages back and forth between mail servers or e-mail clients.
-	\item \textbf{POP3} (Post Office Protocol version 3): the e-mail client contacts the mail server to collect the e-mail messages and downloads them to the hard disk; it can work offline and, depending on the configuration, the messages are removed from the server (which keeps the user's quota free).
-	\item \textbf{IMAP4} (Internet Message Access Protocol version 4): retrieves only the message headers; the messages stay on the server.
-\end{itemize}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=0.75\linewidth]{figures/MailServer}
-	\caption{SMTP, POP3 and IMAP in mail delivery}
-	\label{MailServer}
-\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Practices}
 The following commands are used to practice the concepts of this chapter on a Windows device.
-
-\setlength{\arrayrulewidth}{1.5pt}
-\arrayrulecolor{white}
 
 \begin{table}[h!]
 	\centering
@@ -1423,17 +979,17 @@ The following commands are used to practice the concepts of this chapter on a Wi
 		\rowcolor{TableLightBlue}
 		Find your MAC address & \texttt{ipconfig /all} \quad or \quad \texttt{getmac} \\ \hline
 		\rowcolor{TableLightBlue}
-		Find your real (public) IP address & \texttt{https://www.whatismyip.com/} \\ \hline
+		Find your private IP address & \texttt{ipconfig} \\ \hline
 		\rowcolor{TableLightBlue}
-		Find your private IP address & \texttt{ipconfig}, \texttt{ipconfig /all}, \texttt{ipconfig /release}, \texttt{ipconfig /renew} \\ \hline
+		Find your public IP address & \texttt{https://www.whatismyip.com/} \\ \hline
 		\rowcolor{TableLightBlue}
-		Show the ARP table (IP to MAC mapping) & \texttt{arp -a} \\ \hline
+		Show the ARP table (IP to MAC) & \texttt{arp -a} \\ \hline
 		\rowcolor{TableLightBlue}
-		Find the current sessions and ports on your device & \texttt{netstat -n} \quad or \quad \texttt{netstat -a} \\ \hline
+		Show current sessions and ports & \texttt{netstat -n} \quad or \quad \texttt{netstat -a} \\ \hline
 		\rowcolor{TableLightBlue}
-		Find the IP of the domain Yahoo.com & \texttt{nslookup yahoo.com} \\ \hline
+		Find the IP of a domain & \texttt{nslookup yahoo.com} \\ \hline
 		\rowcolor{TableLightBlue}
-		Test connectivity between hosts & \texttt{ping IP} \quad or \quad \texttt{ping URL} (options: \texttt{-t}, \texttt{-n}, \texttt{-l}) \\ \hline
+		Test connectivity between hosts & \texttt{ping IP} \quad or \quad \texttt{ping URL} \\ \hline
 	\end{tabularx}
 	\caption{Session 1 practices}
 	\label{tab:practices}
