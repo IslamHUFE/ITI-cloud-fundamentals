@@ -85,5 +85,674 @@ His computer architecture design consists of a Control Unit (CU), Arithmetic and
 \end{minipage}
 
 \subsubsection{Arithmetic and Logic Unit (ALU)}
+The ALU carries out \textbf{arithmetic} operations (add, subtract, etc.) and \textbf{logic} operations (AND, OR, NOT, etc.).
+
+\subsubsection{Control Unit (CU)}
+Controls the operation of the ALU, memory, and I/O devices, telling them how to respond to the program instructions it reads from memory. It also provides the \textbf{timing and control signals} needed by the other components.
+
+\setlength{\arrayrulewidth}{1.5pt}
+\arrayrulecolor{white}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Buses}
+Buses transmit data from one part of the computer to another, connecting the main internal components to the CPU and memory. A standard system bus consists of three buses:
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\textcolor{white}{\textbf{Bus}} & \textcolor{white}{\textbf{Function}} \\ \hline
+		\rowcolor{TableLightBlue}
+		Address bus & Carries the \textbf{addresses} of data (not the data itself) between the processor and memory \\ \hline
+		\rowcolor{TableLightBlue}
+		Data bus & Carries the \textbf{data} between the processor, memory, and I/O devices \\ \hline
+		\rowcolor{TableLightBlue}
+		Control bus & Carries \textbf{control signals} from the CPU (and status signals from other devices) to coordinate all activities \\ \hline
+	\end{tabularx}
+	\caption{System buses}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Memory Unit}
+	Consists of \textbf{RAM} (Random Access Memory) and \textbf{ROM} (Read Only Memory), also called primary or main memory. It is fast and directly accessible by the CPU, unlike the hard drive (secondary memory).
+	
+	RAM is split into byte-sized locations, each having a unique \textbf{address} and its \textbf{contents}. Loading data from the hard drive into RAM lets the CPU work much faster.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{figures/Memory}
+		\caption{Memory unit}
+		\label{Memory}
+	\end{figure}
+\end{minipage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Input and Output Devices}
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\textcolor{white}{\textbf{Type}} & \textcolor{white}{\textbf{Purpose}} & \textcolor{white}{\textbf{Examples}} \\ \hline
+		\rowcolor{TableLightBlue}
+		Input & Provide raw data and control signals to the computer & Keyboard (default), mouse, microphone, scanner, touchpad, barcode/QR reader, camera \\ \hline
+		\rowcolor{TableLightBlue}
+		Output & Present the results of processing in a human-readable form & Screen (default), projector, speakers, printer, plotter \\ \hline
+		\rowcolor{TableLightBlue}
+		Input / Output & Work in both directions & Touch screen, network, USB and Type-C ports, and secondary storage (hard disk, flash memory, CD/DVD) \\ \hline
+	\end{tabularx}
+	\caption{Input and output devices}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Computer Operating System}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{What is an Operating System?}
+	When a computer turns on, the first code to run is the \textbf{bootstrap}, stored in ROM (the BIOS). After booting, many applications and devices need to be handled efficiently, so the user feels the system ``just works''. This is the job of the OS.
+	
+	\textbf{Definition:} A program that controls the execution of other programs and acts as an intermediate layer between the software and the hardware.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{figures/OSDefinition}
+		\caption{OS as an intermediate layer}
+		\label{OSDefinition}
+	\end{figure}
+\end{minipage}
+
+\subsubsection{Main Objectives}
+\begin{itemize}
+	\item \textbf{Efficiency:} responsiveness and fluidity.
+	\item \textbf{Ease of use:} convenient for the user.
+	\item \textbf{Abstraction and extensibility:} support for new devices and software.
+\end{itemize}
+
+\subsubsection{Main Pieces}
+\begin{itemize}
+	\item \textbf{Kernel:} the core part that handles low-level functions; it must be running at all times (resident in main memory).
+	\item \textbf{Libraries, applications, and tools} shipped with the OS (browsers, frameworks, native apps).
+\end{itemize}
+
+\subsubsection{Common Operating Systems}
+Microsoft Windows -- GNU/Linux -- macOS -- iOS -- Android.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{OS Categories}
+\subsubsection{According to Usage Type}
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{4cm}|}
+		\hline
+		\rowcolor{TableCyan}
+		\textcolor{white}{\textbf{Type}} & \textcolor{white}{\textbf{Description}} & \textcolor{white}{\textbf{Examples}} \\ \hline
+		\rowcolor{TableLightBlue}
+		Batch & Executes a sequence of steps repeatedly without human intervention & Old mainframes, DOS \\ \hline
+		\rowcolor{TableLightBlue}
+		Time sharing & Many users or applications share the limited hardware resources & Windows, macOS, Linux \\ \hline
+		\rowcolor{TableLightBlue}
+		Parallel / Distributed & One OS coordinates physically distributed (tightly coupled) hardware & AIX, Solaris \\ \hline
+		\rowcolor{TableLightBlue}
+		Network & Systems loosely coupled over a network protocol such as IP & Windows Server, Novell NetWare \\ \hline
+		\rowcolor{TableLightBlue}
+		Real time & Needs fine-grained timing precision in execution and response & Embedded and control systems \\ \hline
+	\end{tabularx}
+	\caption{OS categories by usage type}
+\end{table}
+
+\subsubsection{According to Design}
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}p{4cm}|}
+		\hline
+		\rowcolor{TableCyan}
+		\textcolor{white}{\textbf{Type}} & \textcolor{white}{\textbf{Description}} & \textcolor{white}{\textbf{Examples}} \\ \hline
+		\rowcolor{TableLightBlue}
+		Monolithic & The entire OS runs in high-privilege kernel space, with no separation between kernel and user-level processes & Many UNIX flavors \\ \hline
+		\rowcolor{TableLightBlue}
+		Modular & Some parts are plug-and-play modules that can be updated independently of the kernel & Windows, Linux, macOS \\ \hline
+		\rowcolor{TableLightBlue}
+		Micro-service & OS features are split into smaller parts running in kernel or user mode, which makes maintenance and error tracking easier & Some Red Hat versions \\ \hline
+	\end{tabularx}
+	\caption{OS categories by design}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Why Do We Need an OS?}
+The OS runs and facilitates applications, manages conflicts between them, and provides common services such as security (encryption, authentication, authorization). It abstracts the hardware so applications run seamlessly. The complexities it handles are:
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Complex and Multiprocessor Systems}
+	Modern CPUs have multiple cores: \textbf{homogeneous} platforms have identical cores, while \textbf{heterogeneous} ones have cores with different capabilities. Other engines such as the GPU also exist. The OS must schedule programs efficiently across all of them and hide the differences in hardware (display, storage, sensors, etc.) from applications.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{figures/MultiCore}
+		\caption{Multi-core CPU}
+		\label{MultiCore}
+	\end{figure}
+\end{minipage}
+
+\subsection{Multitasking}
+Many applications run at the same time: \textbf{foreground} applications started by the user and \textbf{background} ones started by the OS. The OS streamlines their execution.
+
+\subsection{Multiuser Systems}
+Several users (an administrator and others with different permissions) may use the same system. The OS must give each user fast response while enforcing \textbf{privacy and security} between them.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{OS Components and Responsibilities}
+
+\begin{minipage}[c]{0.6\textwidth}
+	The OS supports different hardware, lets multiple applications coexist, and hides the complexity. It exposes \textbf{APIs} that programs use to request access to system resources, and it streamlines simultaneous requests using scheduling, I/O management, and conflict handling.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{figures/OSComponents}
+		\caption{OS components}
+		\label{OSComponents}
+	\end{figure}
+\end{minipage}
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\textcolor{white}{\textbf{Requirement}} & \textcolor{white}{\textbf{OS solution}} \\ \hline
+		\rowcolor{TableLightBlue}
+		Applications need time on the CPU & Scheduling algorithms \\ \hline
+		\rowcolor{TableLightBlue}
+		Applications need memory for variables and calculations & Memory management and APIs \\ \hline
+		\rowcolor{TableLightBlue}
+		Applications need to access different devices & Device and I/O management \\ \hline
+		\rowcolor{TableLightBlue}
+		Users need to save and read back content & File system \\ \hline
+		\rowcolor{TableLightBlue}
+		Core operations must be secure & Security subsystem (access and protection) \\ \hline
+		\rowcolor{TableLightBlue}
+		Ease of use & GUI and shell \\ \hline
+	\end{tabularx}
+	\caption{Responsibilities of an OS}
+\end{table}
+
+\subsection{Why Should a Developer Know the OS?}
+The choice of language, runtime features, and inter-process communication (IPC) depends on the OS. It is also needed for debugging, for example, a slow application may be writing to the disk too often, swapping pages frequently, or being affected by its scheduling priority. Interfacing with a custom device or authenticating users also requires the OS APIs.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Processes and Scheduling}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Program and Process}
+	A \textbf{program} is the static, built code of a solution. When it is triggered to run, the OS assigns it a process ID and tracks it as a \textbf{process}. In short, a process is a \textbf{program in execution}.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/ProcessMemory}
+		\caption{Process sections}
+		\label{ProcessMemory}
+	\end{figure}
+\end{minipage}
+
+\subsubsection{Process Contents}
+\begin{itemize}
+	\item \textbf{Text section:} program instructions.
+	\item \textbf{Data section:} global and static variables.
+	\item \textbf{Stack section:} local variables, return addresses, method parameters.
+	\item \textbf{Heap section:} dynamic allocation at run-time.
+	\item \textbf{Program counter:} address of the next instruction.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Process States}
+	A process goes through several states in its lifecycle:
+	\begin{itemize}
+		\item \textbf{New:} being created.
+		\item \textbf{Ready:} waiting to be assigned to a processor.
+		\item \textbf{Running:} instructions are being executed.
+		\item \textbf{Waiting:} waiting for an event (e.g., I/O).
+		\item \textbf{Terminated:} finished execution.
+	\end{itemize}
+	The OS monitors these transitions and tries to limit switching a process between CPU cores.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.95\linewidth]{figures/ProcessStates}
+		\caption{Process states}
+		\label{ProcessStates}
+	\end{figure}
+\end{minipage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Process Control Block (PCB)}
+	The data structure the OS keeps for each process:
+	\begin{itemize}
+		\item \textbf{Process ID} and \textbf{state}.
+		\item \textbf{Pointer:} to the parent process.
+		\item \textbf{Priority:} used in scheduling.
+		\item \textbf{Program counter} and \textbf{CPU registers} (including core affinity).
+		\item \textbf{Memory management} information.
+		\item \textbf{I/O status:} devices assigned.
+		\item \textbf{Accounting:} timers, time remaining, paging needs.
+	\end{itemize}
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{figures/PCB}
+		\caption{Process Control Block}
+		\label{PCB}
+	\end{figure}
+\end{minipage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Context Switching}
+	Swapping the running process with another so other applications can run:
+	\begin{enumerate}
+		\item Pause the current process and \textbf{save its context} (PC, registers, status).
+		\item Switch to the new process.
+		\item \textbf{Restore} the new process's context.
+	\end{enumerate}
+	This lets the process continue exactly from where it stopped.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.95\linewidth]{figures/ContextSwitch}
+		\caption{Context switching}
+		\label{ContextSwitch}
+	\end{figure}
+\end{minipage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Scheduling}
+	The OS uses queues to organize processes:
+	\begin{itemize}
+		\item \textbf{Ready queue:} processes ready to be scheduled.
+		\item \textbf{Waiting queue:} processes blocked on I/O or a device.
+		\item \textbf{Job queue:} all processes in the system (bookkeeping).
+	\end{itemize}
+	
+	\textbf{Scheduling criteria:} CPU utilization, throughput, responsiveness, and resource waiting time, while keeping fairness.
+	
+	\textbf{Algorithms:} FCFS, SJF, SRTF, Round-Robin, and static/dynamic priority.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.95\linewidth]{figures/SchedulingQueues}
+		\caption{Scheduling queues}
+		\label{SchedulingQueues}
+	\end{figure}
+\end{minipage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Threads}
+	A thread is a \textbf{lightweight process}. A process can create several threads, each with its own program counter, context, and registers, to achieve \textbf{parallelism} inside the same process.
+	
+	\textbf{Examples:} a chat program (sending and receiving run independently) and strategy games (many actions happen at once). Threads can run in user mode or kernel mode.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/Threads}
+		\caption{Single vs. multi-threaded process}
+		\label{Threads}
+	\end{figure}
+\end{minipage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Memory Management}
+With many processes in memory at once, each needs memory for its \textbf{code}, its \textbf{data} (strings, variables), and \textbf{run-time} requests (stack/heap). The OS and kernel components also need memory, as do some devices (e.g., printer spooling).
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Address Binding}
+	A program is loaded into a different memory location each time it runs, and a process swapped out to virtual memory (part of secondary storage) usually returns to another location. So its addresses change at run-time. The solution is to \textbf{map} the program's compiled addresses to actual addresses in physical memory.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/Swapping}
+		\caption{Swapping}
+		\label{Swapping}
+	\end{figure}
+\end{minipage}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsubsection{Logical vs. Physical Address}
+	The compiler translates the symbolic addresses in the source code into relative addresses (\textbf{logical addresses}), which are measured from the base address where the OS loads the program. Since physical memory cannot hold all programs, \textbf{virtual memory} is mapped onto it, and the \textbf{Memory Management Unit (MMU)} translates logical addresses into \textbf{physical addresses}.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.95\linewidth]{figures/MMU}
+		\caption{Address translation by the MMU}
+		\label{MMU}
+	\end{figure}
+\end{minipage}
+
+\subsection{Inter-Process Communication (IPC)}
+Processes often need to communicate to coordinate work. The OS provides two common mechanisms:
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		& \textcolor{white}{\textbf{Shared memory}} & \textcolor{white}{\textbf{Message passing}} \\ \hline
+		\rowcolor{TableLightBlue}
+		Idea & Processes share a memory area acting as a buffer (one produces, the other consumes) & Processes communicate through a predefined link (socket, named pipe, file) using Send and Receive \\ \hline
+		\rowcolor{TableLightBlue}
+		Requirement & \textbf{Synchronization} when both write at the same time & Agreement on the channel and protocol (e.g., TCP/IP client and server) \\ \hline
+	\end{tabularx}
+	\caption{IPC methods}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{I/O Management}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{I/O Subsystem}
+	Many devices connect to the system (displays, keyboards, storage, sensors, Wi-Fi, Bluetooth), each with its own data format, speed, and error reporting. The OS presents a \textbf{unified I/O system} that hides this complexity from applications.
+	
+	Peripherals communicate through the data, address, and control buses using protocols such as \textbf{PCIe}, \textbf{I2C}, and \textbf{ACPI}.
+	
+	A kernel-mode \textbf{device driver} handles all communication with a device and abstracts its details; there is also a \textbf{bus driver} for each bus.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.95\linewidth]{figures/IOSubsystem}
+		\caption{I/O subsystem}
+		\label{IOSubsystem}
+	\end{figure}
+\end{minipage}
+
+\subsection{I/O Device Categories}
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		& \textcolor{white}{\textbf{Block devices}} & \textcolor{white}{\textbf{Character devices}} \\ \hline
+		\rowcolor{TableLightBlue}
+		Transfer unit & A block (group of bytes) per read/write & A single character (one byte) \\ \hline
+		\rowcolor{TableLightBlue}
+		Examples & Flash memory, digital camera & Keyboard, serial ports, some sensors, microcontrollers \\ \hline
+	\end{tabularx}
+	\caption{Block vs. character devices}
+\end{table}
+
+\subsection{I/O Protocol Categories}
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.8cm}|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\textcolor{white}{\textbf{Protocol}} & \textcolor{white}{\textbf{Description}} \\ \hline
+		\rowcolor{TableLightBlue}
+		Special instruction I/O & Custom CPU instructions to control devices, each device having a unique I/O address. Fast but rare \\ \hline
+		\rowcolor{TableLightBlue}
+		Memory-mapped I/O (MMIO) & The most common. The device and OS share an address range; the device reads/writes it to communicate, without using up CPU cycles. Used for high-speed network and graphics devices \\ \hline
+		\rowcolor{TableLightBlue}
+		Direct Memory Access (DMA) & For devices slower than the CPU or bus. A DMA controller handles the transfer and interrupts the CPU only when it is complete \\ \hline
+	\end{tabularx}
+	\caption{I/O protocols}
+\end{table}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Interrupt Handling}
+	\begin{itemize}
+		\item \textbf{Polling (programmed I/O):} the CPU checks the interrupt information periodically and calls the proper routine (driver).
+		\item \textbf{Interrupt-driven I/O:} an \textbf{interrupt vector} holds the addresses of all Interrupt Service Routines (ISRs). Using the unique Interrupt Request number (\textbf{IRQ}) of each device, the OS finds the right ISR. Most OSs use this method.
+	\end{itemize}
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.95\linewidth]{figures/Interrupt}
+		\caption{Interrupt handling}
+		\label{Interrupt}
+	\end{figure}
+\end{minipage}
+
+\subsection{Synchronous vs. Asynchronous I/O}
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		& \textcolor{white}{\textbf{Synchronous}} & \textcolor{white}{\textbf{Asynchronous}} \\ \hline
+		\rowcolor{TableLightBlue}
+		Behavior & Control returns to the process only \textbf{after} the I/O operation completes & Control returns \textbf{immediately}; the I/O continues while other operations run \\ \hline
+		\rowcolor{TableLightBlue}
+		Example & Printing & Network send/receive using threads \\ \hline
+	\end{tabularx}
+	\caption{Synchronous vs. asynchronous I/O}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Synchronization and Critical Sections}
+When one thread changes shared data while another reads it, a \textbf{race condition} occurs and the result is unpredictable. Access to shared variables (shared memory, files, ports) must be synchronized, and the OS provides:
+
+\begin{itemize}
+	\item \textbf{Mutex:} enforces mutual exclusion; only the holder of the ``key'' proceeds while the other waits until it finishes.
+	\item \textbf{Semaphore:} a generalized mutex; a \textbf{binary semaphore} takes the value 0 or 1 and is used to lock critical sections.
+\end{itemize}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Deadlocks}
+	A set of processes become blocked because each holds a resource and waits for another resource held by another process. For example, process A holds resource 1 and needs resource 2, while B holds resource 2 and needs resource 1.
+	
+	A deadlock can arise only if all four conditions hold:
+	\begin{itemize}
+		\item \textbf{Mutual exclusion:} a resource is not shareable.
+		\item \textbf{Hold and wait:} a process holds one resource while waiting for others.
+		\item \textbf{No preemption:} a resource cannot be taken by force.
+		\item \textbf{Circular wait:} processes wait for each other in a circle.
+	\end{itemize}
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/Deadlock}
+		\caption{Deadlock}
+		\label{Deadlock}
+	\end{figure}
+\end{minipage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{File Systems}
+Applications read and write files through the OS, which manages them using two components:
+\begin{itemize}
+	\item \textbf{Directory service:} organizes files in a structured way and controls access (read, write, edit).
+	\item \textbf{Storage service:} communicates with the underlying hardware (disks) and abstracts the storage devices.
+\end{itemize}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{File Concept}
+	A file is a collection of related data stored together and accessed by a unique name. It can be a plain sequence of bytes (\texttt{.bin}), a structured format with headers (\texttt{.exe}), or an application format such as JSON or XML.
+	
+	Common attributes: location, extension, size, access controls, and operation history. Some are kept in the \textbf{file control block}, which the OS exposes through APIs.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/FileSystem}
+		\caption{File system services}
+		\label{FileSystem}
+	\end{figure}
+\end{minipage}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Directory Name Space}
+	Files are organized \textbf{hierarchically} inside folders (directories), and this structure is called the directory namespace. It can be multi-level and supports searching by size, type, access level, etc.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{figures/DirectoryTree}
+		\caption{Directory tree}
+		\label{DirectoryTree}
+	\end{figure}
+\end{minipage}
+
+\subsection{Access Control}
+Access levels apply to both files and directories. Each user has access IDs and permissions, and each file has its own permissions (read, write, modify). For example, a file can be readable by everyone but writable by no one except its owner. The file system enforces these controls at run-time.
+
+\subsection{Concurrency and Cleanup}
+\begin{itemize}
+	\item A file in use cannot be moved or deleted by another process; the attempt fails with an error code. Programmers should open files with the proper access level and mode (read/write).
+	\item The OS periodically clears unused temporary files (garbage collector), and users can configure automatic cleanup of specific locations.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Access and Protection}
+Even a single-user, offline system needs protection: programs must be protected from other applications, and critical devices must be guarded. The OS provides APIs for access control and protection.
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{User Mode and Kernel Mode (Rings)}
+	The OS divides execution privileges into \textbf{rings}, giving programs different access levels.
+	\begin{itemize}
+		\item \textbf{Ring 3 (user mode):} applications and user services; cannot access the hardware directly.
+		\item \textbf{Ring 0 (kernel mode):} the kernel and drivers; highest privilege and direct hardware access.
+	\end{itemize}
+	In practice, most OSs use only Ring 0 and Ring 3.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/Rings}
+		\caption{Protection rings}
+		\label{Rings}
+	\end{figure}
+\end{minipage}
+
+\subsection{Protection}
+A threat is any local or remote program that tries to compromise the system's resources. Modern OSs defend with:
+\begin{itemize}
+	\item \textbf{Authentication:} verifying who the requester is.
+	\item \textbf{Authorization:} checking the access level the requester is allowed.
+	\item \textbf{Access Control Lists (ACLs):} map resources to permission levels.
+	\item \textbf{Encryption} and certificate verification services.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Virtualization}
+
+\begin{minipage}[c]{0.6\textwidth}
+	Virtualization makes each environment believe it has dedicated access to the hardware. It is delivered through \textbf{Virtual Machines (VMs)}, each with its own \textbf{guest OS} that may differ from the \textbf{host OS}. The \textbf{hypervisor} manages the VMs' access to the hardware, and changes inside a VM do not affect the host or other VMs.
+	
+	VMs use hardware efficiently and are heavily used in servers and the cloud.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/Virtualization}
+		\caption{Virtual machines and hypervisor}
+		\label{Virtualization}
+	\end{figure}
+\end{minipage}
+
+\subsubsection{Advantages}
+\begin{itemize}
+	\item Run operating systems when the physical hardware is unavailable, and run legacy systems.
+	\item Easy to create, back up, and migrate machines.
+	\item Test software on clean installs, and debug by suspending and resuming a machine.
+	\item Emulate more machines than are physically available.
+\end{itemize}
+
+\section{User Interface and Shell}
+
+\begin{minipage}[c]{0.6\textwidth}
+	The UI is not part of the kernel, but it is considered an integral part of the OS. It can be:
+	\begin{itemize}
+		\item \textbf{GUI:} a rich graphical interface for interacting with the computer.
+		\item \textbf{Shell (CLI):} a simpler text-based command-line interface. Programmers often prefer it for quickly navigating the file system and interacting with the OS.
+	\end{itemize}
+	The UI and shell can affect a developer's choice of language, command-line arguments handling, and standard input/output pipes.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/GUIvsCLI}
+		\caption{GUI vs. command line}
+		\label{GUIvsCLI}
+	\end{figure}
+\end{minipage}
 
 
