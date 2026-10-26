@@ -20,3 +20,591 @@ Virtualization is an attempt to trick the operating system into believing it is 
 \end{itemize}
 
 \section{What is a Virtual Machine}
+\begin{minipage}[c]{0.6\textwidth}
+	A \textbf{VM (Virtual Machine)} is a software-based computer that behaves like a physical one. Virtualization creates \textbf{virtual hardware} by cloning the physical hardware, and the \textbf{hypervisor} uses this virtual hardware to build the VM.
+	
+	A VM is simply a \textbf{set of files}, so it can be exported and moved to other hosts, and it can run applications like a physical machine. With a hypervisor running VMs, one computer can run \textbf{multiple operating systems simultaneously} (unlike dual boot, where only one OS runs at a time).
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/VM}
+		\caption{Virtual machine hardware}
+		\label{VM}
+	\end{figure}
+\end{minipage}
+
+\subsection{Virtual Machine Files}
+The hypervisor creates the VM files and stores them in a directory.
+
+\setlength{\arrayrulewidth}{1.5pt}
+\arrayrulecolor{white}
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}p{4cm}|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\textcolor{white}{\textbf{File type}} & \textcolor{white}{\textbf{File name}} & \textcolor{white}{\textbf{Description}} \\ \hline
+		\rowcolor{TableLightBlue}
+		Log file & \texttt{<vmname>.log} & Keeps a log of the VM activity \\ \hline
+		\rowcolor{TableLightBlue}
+		Disk file & \texttt{<vmname>.vmdk} & Stores the content of the VM's disk drive \\ \hline
+		\rowcolor{TableLightBlue}
+		Snapshot files & \texttt{<vmname>.vmsd}, \texttt{<vmname>.vmsn} & Store information about the VM snapshots \\ \hline
+		\rowcolor{TableLightBlue}
+		Configuration file & \texttt{<vmname>.vmx} & Stores the VM name, BIOS, guest OS, and memory settings \\ \hline
+	\end{tabularx}
+	\caption{Main virtual machine files}
+	\label{tab:vmfiles}
+\end{table}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Snapshot}
+	A snapshot saves the \textbf{state} of a VM at a specific moment so you can return to it later. A snapshot saves:
+	\begin{itemize}
+		\item The state of the VM disks.
+		\item The contents of the VM memory.
+		\item The VM settings.
+	\end{itemize}
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{figures/Snapshot}
+		\caption{VM snapshot}
+		\label{Snapshot}
+	\end{figure}
+\end{minipage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{The Hypervisor}
+
+\begin{minipage}[c]{0.6\textwidth}
+	The hypervisor is a \textbf{software layer} that sits between the hardware and the operating systems. It pulls the physical resources (CPU, RAM, storage, network) from the server, turns them into virtual hardware, and shares them among the VMs it hosts.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{figures/Hypervisor}
+		\caption{Hypervisor layer}
+		\label{Hypervisor}
+	\end{figure}
+\end{minipage}
+
+\subsection{Types of Hypervisors}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsubsection{Type 1 (Bare-metal)}
+	Installed \textbf{directly on the hardware} without a host OS, so it is faster and used in data centers.
+	
+	\textbf{Examples:} VMware ESXi, Microsoft Hyper-V, Citrix XenServer.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{figures/Type1}
+		\caption{Type 1 hypervisor}
+		\label{Type1}
+	\end{figure}
+\end{minipage}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsubsection{Type 2 (Hosted)}
+	Installed as an application \textbf{on top of a host operating system}, so it is easier to set up and used on personal computers.
+	
+	\textbf{Examples:} VMware Workstation, VirtualBox, QEMU, KVM.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{figures/Type2}
+		\caption{Type 2 hypervisor}
+		\label{Type2}
+	\end{figure}
+\end{minipage}
+
+\subsection{Practice: Creating a VM on VMware Workstation}
+\begin{enumerate}
+	\item Install VMware Workstation, open it, and choose \textbf{Create a New Virtual Machine} (or press \texttt{Ctrl+N}).
+	\item Select the installation source (for example a Windows 10 ISO file).
+	\item Set the VM name, the number of processors, the RAM, and the disk size.
+	\item Finish the wizard, power on the VM, and it will boot from the ISO to start the OS installation.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{The Data Center}
+
+\begin{minipage}[c]{0.6\textwidth}
+	A data center is the \textbf{hardware infrastructure} that supports virtualization, focused on processing large amounts of data. It has three main components:
+	\begin{itemize}
+		\item \textbf{Compute}
+		\item \textbf{Storage}
+		\item \textbf{Networks}
+	\end{itemize}
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/DataCenter}
+		\caption{Data center}
+		\label{DataCenter}
+	\end{figure}
+\end{minipage}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Compute Systems}
+	The hardware and operating system software that runs the applications. A PC has a user-friendly interface, while a server focuses on running programs.
+	
+	\textbf{Types of servers:} Tower, Rack-mounted, and Blade server.
+	
+	Data centers typically use the \textbf{x86} architecture (the type of processor used by the server). Virtualization technology is compatible with \textbf{64-bit} but not 32-bit.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/Servers}
+		\caption{Types of servers}
+		\label{Servers}
+	\end{figure}
+\end{minipage}
+
+\subsection{Networks}
+Transfer data across the data center so that devices can communicate. They use switches, NICs, routers, and Ethernet cables (see Chapter 1).
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Storage}
+	A data center must accommodate high levels of data, so it uses devices built specifically for storage that provide \textbf{availability} and \textbf{redundancy}.
+	
+	\subsubsection{RAID}
+	\textbf{Redundant Array of Independent Disks:} hard drives linked together to create a large volume of redundant storage. The RAID level defines the writing method:
+	\begin{itemize}
+		\item \textbf{RAID 0:} Striping.
+		\item \textbf{RAID 1:} Mirroring.
+		\item \textbf{RAID 5:} Parity.
+	\end{itemize}
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/RAID}
+		\caption{RAID 0 and RAID 1}
+		\label{RAID}
+	\end{figure}
+\end{minipage}
+
+\subsubsection{Block-level vs. File-level Storage}
+\begin{itemize}
+	\item \textbf{Block-level:} data is written to and accessed from storage volumes (blocks).
+	\item \textbf{File-level:} data is written to disks but accessed through the default file system.
+\end{itemize}
+
+\subsubsection{Types of Data Center Storage}
+
+\setlength{\arrayrulewidth}{1.5pt}
+\arrayrulecolor{white}
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{4.2cm}|>{\raggedright\arraybackslash}X|>{\centering\arraybackslash}p{2.4cm}|}
+		\hline
+		\rowcolor{TableCyan}
+		\textcolor{white}{\textbf{Type}} & \textcolor{white}{\textbf{Description}} & \textcolor{white}{\textbf{Level}} \\ \hline
+		\rowcolor{TableLightBlue}
+		DAS (Direct Attached Storage) & Storage device attached directly to a server & Block \\ \hline
+		\rowcolor{TableLightBlue}
+		NAS (Network Attached Storage) & Storage device attached to a network that servers on the network can access & File \\ \hline
+		\rowcolor{TableLightBlue}
+		SAN (Storage Area Network) & Clustered storage devices on their own network that servers connect to & Block \\ \hline
+	\end{tabularx}
+	\caption{DAS vs. NAS vs. SAN}
+	\label{tab:storagetypes}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{figures/DAS_NAS_SAN}
+	\caption{DAS, NAS, and SAN}
+	\label{DAS_NAS_SAN}
+\end{figure}
+
+\subsubsection{Storage Protocols}
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{5.5cm}|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\textcolor{white}{\textbf{Protocol}} & \textcolor{white}{\textbf{Application}} \\ \hline
+		\rowcolor{TableLightBlue}
+		SCSI, SAS & Medium-sized blade servers, enterprise servers, DAS \\ \hline
+		\rowcolor{TableLightBlue}
+		SATA, eSATA & Small-sized tower servers, DAS \\ \hline
+		\rowcolor{TableLightBlue}
+		FC (Fibre Channel), FCoE & Enterprise servers, SAN \\ \hline
+		\rowcolor{TableLightBlue}
+		iSCSI & Enterprise servers, NAS \\ \hline
+	\end{tabularx}
+	\caption{Storage protocols}
+	\label{tab:storageprotocols}
+\end{table}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsubsection{Storage Provisioning}
+	\begin{itemize}
+		\item \textbf{Thick provisioning:} the disk space is \textbf{pre-allocated} to a server or VM, so the logical space equals the physical space set aside on the disk.
+		\item \textbf{Thin provisioning:} space is \textbf{allocated dynamically} as the VM needs it (over-subscribed).
+	\end{itemize}
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/ThickThin}
+		\caption{Thick vs. thin disks}
+		\label{ThickThin}
+	\end{figure}
+\end{minipage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{The Virtual Data Center}
+
+\begin{minipage}[c]{0.6\textwidth}
+	Virtualization makes the large amount of data center hardware more efficient.
+	\begin{itemize}
+		\item Higher \textbf{availability} of applications.
+		\item Less labor needed, as the administrator can monitor everything from a desk using a program.
+		\item Less energy, space, and power consumption, which also reduces the carbon footprint.
+		\item \textbf{Software-defined data center (SDDC):} the hypervisor pools the physical resources into a virtual data center.
+	\end{itemize}
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/VirtualDataCenter}
+		\caption{Virtual data center}
+		\label{VirtualDataCenter}
+	\end{figure}
+\end{minipage}
+
+\subsection{VMware vSphere}
+A suite of virtualization technology designed for managing large enterprise data centers.
+
+\setlength{\arrayrulewidth}{1.5pt}
+\arrayrulecolor{white}
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.5cm}|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\textcolor{white}{\textbf{Component}} & \textcolor{white}{\textbf{Function}} \\ \hline
+		\rowcolor{TableLightBlue}
+		ESXi & VMware's Type 1 hypervisor, installed directly on the physical server to create the virtual layer (built from a Unix microkernel and the VMkernel) \\ \hline
+		\rowcolor{TableLightBlue}
+		vCenter & Management software installed on a dedicated server to manage the ESXi servers and the other components of the virtualized data center \\ \hline
+		\rowcolor{TableLightBlue}
+		vSphere Client & GUI program that lets administrators configure vCenter and the hosts and operate their VMs remotely \\ \hline
+		\rowcolor{TableLightBlue}
+		vSphere Host Client & GUI program that configures only a single host and operates its VMs \\ \hline
+	\end{tabularx}
+	\caption{vSphere components}
+	\label{tab:vsphere}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.75\linewidth]{figures/vSphere}
+	\caption{vSphere architecture}
+	\label{vSphere}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Types of Virtualization}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Server Virtualization}
+	Multiple VMs are hosted on one physical server, which increases the efficiency of the data center and lets computing resources be delivered to customers using less hardware.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/ServerVirtualization}
+		\caption{Server virtualization}
+		\label{ServerVirtualization}
+	\end{figure}
+\end{minipage}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Storage Virtualization}
+	The storage capacity is pooled and distributed to the VMs:
+	\begin{itemize}
+		\item Physical storage devices are partitioned into logical storage units called \textbf{LUNs}.
+		\item LUNs are used to create a \textbf{datastore}.
+		\item VM disks are stored as \texttt{.vmdk} files and VM settings as \texttt{.vmx} files on the datastore.
+	\end{itemize}
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/StorageVirtualization}
+		\caption{Storage virtualization}
+		\label{StorageVirtualization}
+	\end{figure}
+\end{minipage}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Network Virtualization}
+	The physical network components are virtualized to create a \textbf{virtual network}.
+	\begin{itemize}
+		\item \textbf{vSwitch:} a virtual switch that virtual devices connect to in order to communicate with each other.
+		\item \textbf{VLAN:} a virtual LAN segmented into groups of isolated ports, creating different network segments.
+	\end{itemize}
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/VLAN}
+		\caption{VLANs}
+		\label{VLAN}
+	\end{figure}
+\end{minipage}
+
+\subsubsection{Types of Virtual Networks}
+
+\setlength{\arrayrulewidth}{1.5pt}
+\arrayrulecolor{white}
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\textcolor{white}{\textbf{Type}} & \textcolor{white}{\textbf{Description}} \\ \hline
+		\rowcolor{TableLightBlue}
+		Bridged & The host and the VM are connected to the same network, and the VM gets an address on that network like any other device \\ \hline
+		\rowcolor{TableLightBlue}
+		NAT & The VMs use an IP translated from the host's IP (through a NAT device) and communicate on a private network set up on the host \\ \hline
+		\rowcolor{TableLightBlue}
+		Host-only & The VMs use a private network without translated addresses, so they can communicate only with the other VMs on the isolated host network \\ \hline
+	\end{tabularx}
+	\caption{Types of virtual networks}
+	\label{tab:virtualnetworks}
+\end{table}
+
+\subsection{Application and Desktop Virtualization}
+\begin{itemize}
+	\item \textbf{Application virtualization:} some applications have specific system requirements. \textbf{VMware ThinApp} packages the program together with its requirements as a virtual app and delivers it to the end user.
+	\item \textbf{Desktop virtualization:} solves the resource problems of the mobile workforce (workers who need computing without the hardware). \textbf{VMware Horizon} builds the desktop environment from data center resources and delivers it to the end user's device.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Cloud Computing}
+
+\begin{minipage}[c]{0.6\textwidth}
+	Cloud computing is the delivery of \textbf{shared computing resources} (software and/or data) \textbf{on demand through the Internet}, as a pool of resources that can be rapidly provisioned in an automated way. Its value comes from:
+	\begin{itemize}
+		\item Economies of scale.
+		\item Elasticity: it scales with the needs of the organization.
+		\item Cost and operational benefits.
+		\item Easy access for users wherever they are.
+	\end{itemize}
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/Cloud}
+		\caption{Cloud computing}
+		\label{Cloud}
+	\end{figure}
+\end{minipage}
+
+\subsection{Cloud Service Models}
+
+\setlength{\arrayrulewidth}{1.5pt}
+\arrayrulecolor{white}
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.6cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\textcolor{white}{\textbf{Model}} & \textcolor{white}{\textbf{You manage}} & \textcolor{white}{\textbf{Provider manages}} \\ \hline
+		\rowcolor{TableLightBlue}
+		IaaS & Applications, data, OS, and software & Virtualization, servers, storage, and networking \\ \hline
+		\rowcolor{TableLightBlue}
+		PaaS & Applications and data & OS, software, virtualization, servers, storage, and networking \\ \hline
+		\rowcolor{TableLightBlue}
+		SaaS & Nothing (only uses the application) & Everything: the application and the whole infrastructure \\ \hline
+	\end{tabularx}
+	\caption{IaaS vs. PaaS vs. SaaS}
+	\label{tab:servicemodels}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.85\linewidth]{figures/ServiceModels}
+	\caption{On-premises, IaaS, PaaS, and SaaS}
+	\label{ServiceModels}
+\end{figure}
+
+\subsection{Cloud Deployment Models}
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.6cm}|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\textcolor{white}{\textbf{Model}} & \textcolor{white}{\textbf{Description}} \\ \hline
+		\rowcolor{TableLightBlue}
+		Public & Open to the general public; owned, managed, and operated by a third party on the provider's premises, and organizations rent resources from it \\ \hline
+		\rowcolor{TableLightBlue}
+		Private & Used exclusively by a single organization, which has complete control over the infrastructure (on-premises or off-premises) \\ \hline
+		\rowcolor{TableLightBlue}
+		Community & Used exclusively by a specific group of organizations that share the control over the infrastructure \\ \hline
+		\rowcolor{TableLightBlue}
+		Hybrid & A combination of two or more of the models above, bound by technology that allows data and application portability (e.g.\ a private cloud plus rented public cloud resources) \\ \hline
+	\end{tabularx}
+	\caption{Cloud deployment models}
+	\label{tab:deploymentmodels}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{figures/DeploymentModels}
+	\caption{Cloud deployment models}
+	\label{DeploymentModels}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{VMware Solutions}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{vMotion}
+	Moves a \textbf{running} VM from one ESXi host to another without service interruption (live migration), which increases the availability of data and computing resources.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{figures/vMotion}
+		\caption{vMotion}
+		\label{vMotion}
+	\end{figure}
+\end{minipage}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Storage vMotion}
+	Moves the disks and configuration files of a running VM from one datastore to another without service interruption, which increases the availability of storage.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{figures/StoragevMotion}
+		\caption{Storage vMotion}
+		\label{StoragevMotion}
+	\end{figure}
+\end{minipage}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{High Availability (HA)}
+	Pools the hosts and their VMs in a \textbf{cluster}, so if a host fails, its VMs are \textbf{restarted} on alternate hosts.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{figures/HA}
+		\caption{High availability}
+		\label{HA}
+	\end{figure}
+\end{minipage}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Distributed Resource Scheduler (DRS)}
+	HA clusters need to be monitored and managed. DRS provides a shared management interface to monitor and balance the cluster's resources. \textbf{Storage DRS} provides the same solution for storage clusters.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{figures/DRS}
+		\caption{DRS}
+		\label{DRS}
+	\end{figure}
+\end{minipage}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{Fault Tolerance (FT)}
+	A \textbf{secondary copy} of the VM and its files is kept running on another ESXi host and datastore, so if the primary fails the transfer is seamless (no reboot) and not noticeable to the end user.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{figures/FT}
+		\caption{Fault tolerance}
+		\label{FT}
+	\end{figure}
+\end{minipage}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\subsection{vSphere Replication}
+	Makes copies of VMs in a \textbf{different physical location}, which is useful for data protection and disaster recovery, and works with vSphere Client so admins can monitor it.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{figures/Replication}
+		\caption{vSphere Replication}
+		\label{Replication}
+	\end{figure}
+\end{minipage}
