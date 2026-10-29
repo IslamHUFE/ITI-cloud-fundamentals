@@ -1,2 +1,601 @@
-\chapter{Linux}
-%\label{chapter:title}
+\chapter{Linux Operating System}
+
+\providecommand{\th}[1]{\textcolor{white}{\textbf{#1}}}
+\providecommand{\lb}{\rowcolor{TableLightBlue}}
+\setlength{\arrayrulewidth}{1.5pt}
+\arrayrulecolor{white}
+
+\section{Introduction}
+Linux is a free and open-source, Unix-like operating system that runs on servers, desktops, phones, cars, routers, and embedded devices. This chapter covers its history, structure, and the command-line tools every engineer needs, such as file handling, redirection, pipes, archiving, and regular expressions.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Linux History}
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\centering\arraybackslash}p{1.6cm}|>{\raggedright\arraybackslash}p{3.8cm}|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\th{Year} & \th{Event} & \th{Description} \\ \hline
+		\lb 1960s & Multics & MIT and Bell Labs project for a multi-user, time-sharing OS. \\ \hline
+		\lb 1969 & Unix & Ken Thompson started a simple OS at Bell Labs after the company left Multics. \\ \hline
+		\lb 1970s & Unix in C & Dennis Ritchie created C and Unix was rewritten in it, so it could be recompiled for different hardware. \\ \hline
+		\lb 1980s & Commercial Unix & Companies sold their own versions (Solaris, AIX, IRIX) without source code. \\ \hline
+		\lb 1983 & GNU Project & Richard Stallman launched it to build a free OS (freedom to run, study, modify, and distribute). \\ \hline
+		\lb 1991 & Linux kernel & Linus Torvalds (student in Finland) wrote a kernel for the 80386 processor. \\ \hline
+		\lb 1992 & GNU/Linux & Linux kernel released under the GNU license and combined with GNU tools into a complete free OS. \\ \hline
+	\end{tabularx}
+	\caption{Linux history timeline}
+	\label{tab:linuxhistory}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Why Linux and Distributions}
+
+\begin{minipage}[c]{0.6\textwidth}
+	Linux is \textbf{free}, \textbf{safe}, and \textbf{robust}; its source code is open, it runs on many CPU architectures (x86, ARM, PowerPC), has wide driver coverage, a large community, and is highly modular, so it is like \textbf{Lego} blocks. A \textbf{distribution} (distro) packages the kernel with tools and applications.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.8\linewidth]{figures/LinuxDistros}
+		\caption{Linux distributions}
+		\label{LinuxDistros}
+	\end{figure}
+\end{minipage}
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\th{Family} & \th{PC / Server} & \th{Embedded} \\ \hline
+		\lb Red Hat & RHEL, CentOS, Fedora & -- \\ \hline
+		\lb Debian & Debian, Ubuntu & Embedded Debian, Ubuntu Phone \\ \hline
+		\lb SUSE & SUSE Enterprise, openSUSE & -- \\ \hline
+		\lb Others & -- & \r{A}ngstr\"om, Tizen, Firefox OS \\ \hline
+	\end{tabularx}
+	\caption{Common Linux distributions}
+	\label{tab:distros}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Linux System Structure and Principles}
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.4cm}|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\th{Component} & \th{Role} \\ \hline
+		\lb Bootloader & Loads the kernel at startup (GRUB, U-Boot). \\ \hline
+		\lb Kernel & Core of the OS: manages hardware, memory, and processes. \\ \hline
+		\lb Filesystem (FHS) & Standard layout of directories and files. \\ \hline
+		\lb Init process & First process started by the kernel; starts services. \\ \hline
+		\lb Shell & Command interpreter (bash, sh, zsh). \\ \hline
+		\lb Commands and applications & Small tools, scripts, and user/GUI applications. \\ \hline
+	\end{tabularx}
+	\caption{Linux system components}
+	\label{tab:linuxcomponents}
+\end{table}
+
+\textbf{Linux principles:}
+\begin{itemize}
+	\item \textbf{Everything is a file}, including hardware.
+	\item Many \textbf{small, single-purpose programs}.
+	\item Programs can be \textbf{chained} together to perform complex tasks.
+\end{itemize}
+
+\subsection{Filesystem Hierarchy Standard (FHS)}
+
+\begin{minipage}[c]{0.6\textwidth}
+	\renewcommand{\arraystretch}{1.3}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{1.8cm}|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\th{Dir} & \th{Content} \\ \hline
+		\lb \texttt{/} & Root directory \\ \hline
+		\lb \texttt{/bin} & User commands \\ \hline
+		\lb \texttt{/sbin} & System commands \\ \hline
+		\lb \texttt{/boot} & Kernel and bootloader \\ \hline
+		\lb \texttt{/dev} & Device files (hardware) \\ \hline
+		\lb \texttt{/etc} & Configuration files \\ \hline
+		\lb \texttt{/home} & Users' home directories \\ \hline
+		\lb \texttt{/root} & Root user's home \\ \hline
+		\lb \texttt{/lib} & Shared libraries \\ \hline
+		\lb \texttt{/media} & Mount points for storage \\ \hline
+		\lb \texttt{/opt} & Third-party applications \\ \hline
+		\lb \texttt{/proc} & Virtual process files \\ \hline
+		\lb \texttt{/usr} & Other users' applications and libraries \\ \hline
+		\lb \texttt{/var} & Frequently changing files (logs) \\ \hline
+	\end{tabularx}
+\end{minipage}%
+\hfill
+\begin{minipage}[c]{0.36\textwidth}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.95\linewidth]{figures/FHS}
+		\caption{Linux directory tree}
+		\label{FHS}
+	\end{figure}
+\end{minipage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Terminal, Shell, and Command Syntax}
+
+\begin{minipage}[c]{0.6\textwidth}
+	The \textbf{terminal} is the application that takes your input and passes it to the \textbf{shell} (bash, zsh, sh), which interprets and executes it. The prompt shows who and where you are, and the last symbol tells the privilege level: \texttt{\$} for a normal user and \texttt{\#} for \textbf{root}. Shortcut to open a terminal in Ubuntu: \texttt{Ctrl+Alt+T}.
+	
+	\vspace{0.2cm}
+	\begin{center}
+		\texttt{user@host:\textasciitilde/dir\$ command [options] [arguments]}
+	\end{center}
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/Terminal}
+		\caption{Terminal prompt}
+		\label{Terminal}
+	\end{figure}
+\end{minipage}
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{4.2cm}|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\th{Syntax rule} & \th{Meaning} \\ \hline
+		\lb \texttt{-a} & Short option (used in the terminal). \\ \hline
+		\lb \texttt{-{}-all} & Long option (clearer, used in scripts). \\ \hline
+		\lb \texttt{-aR} & Short options can be joined (\texttt{-a -R}). \\ \hline
+		\lb \texttt{-{}-} & End of options (e.g., \texttt{rm -{}- -file}). \\ \hline
+		\lb \texttt{[ ]} & Optional part of the syntax. \\ \hline
+	\end{tabularx}
+	\caption{Command options}
+	\label{tab:options}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Files, Paths, and Basic Commands}
+
+\subsection{File Naming Rules}
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.6cm}|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\th{Rule} & \th{Details} \\ \hline
+		\lb Allowed characters & Any character except \texttt{/} (directory separator) and the NULL character. \\ \hline
+		\lb Length & Usually 255 bytes per name and 4096 bytes per full path (defined by the filesystem, e.g., ext4). \\ \hline
+		\lb Case sensitive & \texttt{file.txt}, \texttt{File.txt}, and \texttt{FILE.txt} are three different files. \\ \hline
+		\lb Hidden files & Names starting with \texttt{.} (e.g., \texttt{.bashrc}). \\ \hline
+		\lb No extensions & The dot is just a character, but common extensions are recommended for clarity. \\ \hline
+		\lb Spaces and symbols & Allowed but not recommended; use \texttt{\_} or \texttt{-} instead. \\ \hline
+		\lb Names starting with \texttt{-} & Access them with \texttt{./} (e.g., \texttt{rm ./-file}). \\ \hline
+	\end{tabularx}
+	\caption{Linux file naming rules}
+	\label{tab:filenames}
+\end{table}
+
+\subsection{Paths}
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.2cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\th{Type} & \th{Meaning} & \th{Example} \\ \hline
+		\lb Absolute & Starts from the root, independent of the current location. & \texttt{/home/user/dir} \\ \hline
+		\lb Relative & Depends on the current directory. & \texttt{../my-project} \\ \hline
+		\lb \texttt{.} and \texttt{..} & Current directory and parent directory. & \texttt{cd ..} \\ \hline
+		\lb \texttt{\textasciitilde} & Home directory of the current user. & \texttt{cd \textasciitilde} \\ \hline
+	\end{tabularx}
+	\caption{Absolute and relative paths}
+	\label{tab:paths}
+\end{table}
+
+\subsection{Basic Commands}
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\th{Command} & \th{Function} & \th{Examples} \\ \hline
+		\lb \texttt{ls} & List files: \texttt{-a} (hidden), \texttt{-l} (long), \texttt{-t} (by time), \texttt{-S} (by size), \texttt{-R} (recursive), \texttt{-d} (directory itself) & \texttt{ls -la}, \texttt{ls -d */} \\ \hline
+		\lb \texttt{tree} & List files as a tree (\texttt{-d} directories only) & \texttt{tree -a} \\ \hline
+		\lb \texttt{pwd} & Print current working directory & \texttt{pwd} \\ \hline
+		\lb \texttt{cd} & Change directory (\texttt{-} goes to the previous one) & \texttt{cd /etc}, \texttt{cd -} \\ \hline
+		\lb \texttt{mkdir} & Make a directory (\texttt{-p} creates parents) & \texttt{mkdir -p a/b/c} \\ \hline
+		\lb \texttt{touch} & Create an empty file & \texttt{touch f1 f2} \\ \hline
+		\lb \texttt{cp} & Copy (\texttt{-r} for directories) & \texttt{cp -r dir1 ../dir2} \\ \hline
+		\lb \texttt{mv} & Move or rename & \texttt{mv a.txt b.txt} \\ \hline
+		\lb \texttt{rm} & Remove (\texttt{-r} directories, \texttt{-i} ask first, \texttt{-f} force) & \texttt{rm -r folder} \\ \hline
+		\lb \texttt{rmdir} & Remove an empty directory & \texttt{rmdir empty} \\ \hline
+		\lb \texttt{clear} & Clear the screen & \texttt{clear} \\ \hline
+	\end{tabularx}
+	\caption{Basic file and directory commands}
+	\label{tab:basiccmds}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Permissions}
+
+\begin{minipage}[c]{0.6\textwidth}
+	Every file has an \textbf{owner} and a \textbf{group}, and the output of \texttt{ls -l} shows its type, permissions, number of hard links, owner, group, size, modification time, and name. Permissions can be changed only by the owner or root.
+	
+	\vspace{0.2cm}
+	\begin{center}
+		\texttt{drwxr-xr-x 2 user staff 4096 Sep 2 22:25 Desktop}
+	\end{center}
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.95\linewidth]{figures/LsLong}
+		\caption{\texttt{ls -l} output}
+		\label{LsLong}
+	\end{figure}
+\end{minipage}
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\th{Permission} & \th{On a file} & \th{On a directory} \\ \hline
+		\lb Read (\texttt{r}) & Display and copy the content. & List the directory content. \\ \hline
+		\lb Write (\texttt{w}) & Modify the content. & Add or delete files (needs \texttt{x} too). \\ \hline
+		\lb Execute (\texttt{x}) & Run the file as a program. & Enter it using \texttt{cd}. \\ \hline
+	\end{tabularx}
+	\caption{Meaning of permissions}
+	\label{tab:perms}
+\end{table}
+
+The first character of \texttt{ls -l} is the file type: \texttt{-} file, \texttt{d} directory, \texttt{l} symbolic link, \texttt{b}/\texttt{c} block/character device, \texttt{p} pipe, \texttt{s} socket. The next nine characters are the permissions for \textbf{user (u)}, \textbf{group (g)}, and \textbf{others (o)}. They are changed with \texttt{chmod}:
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\th{Command} & \th{Effect} \\ \hline
+		\lb \texttt{chmod u+x file} & Add execute for the owner (symbolic mode). \\ \hline
+		\lb \texttt{chmod o-r file} & Remove read from others. \\ \hline
+		\lb \texttt{chmod 755 file} & Octal mode: \texttt{rwxr-xr-x} (r=4, w=2, x=1). \\ \hline
+	\end{tabularx}
+	\caption{The \texttt{chmod} command}
+	\label{tab:chmod}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{File System Internals}
+
+\begin{minipage}[c]{0.6\textwidth}
+	A partition is divided by the filesystem into \textbf{metadata} (like a library's card catalog) and \textbf{data blocks} (like the bookshelves). The metadata of each file is stored in an \textbf{inode}: size, owner, permissions, timestamps, and pointers to the data blocks. The inode does \textbf{not} store the file name; the name is stored in a \textbf{dentry}, which maps a name to an inode number, forms the directory tree, and speeds up repeated access through caching.
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.95\linewidth]{figures/InodeDentry}
+		\caption{Dentry and inode}
+		\label{InodeDentry}
+	\end{figure}
+\end{minipage}
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.4cm}|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\th{Operation} & \th{What happens internally} \\ \hline
+		\lb Copy & New inode and new data blocks (a real duplicate). \\ \hline
+		\lb Rename & Same inode; only the name in the dentry changes. \\ \hline
+		\lb Move (same filesystem) & Old dentry removed and a new one created; the data is untouched. \\ \hline
+		\lb Move (different filesystem) & Everything is copied, then the original is deleted. \\ \hline
+		\lb Delete & The dentry is removed; the content is deleted only when no hard link remains. \\ \hline
+	\end{tabularx}
+	\caption{File operations and the inode}
+	\label{tab:fileops}
+\end{table}
+
+\subsection{Hard Links and Symbolic Links}
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		& \th{Hard link} & \th{Symbolic (soft) link} \\ \hline
+		\lb What it is & Another dentry pointing to the \textbf{same inode}. & A new file (own inode, type \texttt{l}) that stores the \textbf{path} of the target. \\ \hline
+		\lb Directories & Not allowed (loops and a security hole). & Allowed. \\ \hline
+		\lb Across filesystems & Not possible (inode numbers are unique per filesystem only). & Possible. \\ \hline
+		\lb Original deleted & Content stays while another link exists. & Link becomes \textbf{broken} (dangling). \\ \hline
+		\lb Command & \texttt{ln file link} & \texttt{ln -s /abs/path/file link} \\ \hline
+	\end{tabularx}
+	\caption{Hard link vs. symbolic link}
+	\label{tab:links}
+\end{table}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{figures/HardVsSoftLinks}
+	\caption{Hard links vs. symbolic links}
+	\label{HardVsSoftLinks}
+\end{figure}
+
+Useful commands: \texttt{ls -i} (show inode number), \texttt{stat file} (file status), \texttt{df} (disk usage), and \texttt{df -i} (inode usage). A disk can be full either because of no free space or because it is \textbf{out of inodes}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Wildcards (Globbing)}
+Wildcards apply a command on a group of files or directories, and they work on \textbf{file names only} (regular expressions are used for text).
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.4cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\th{Wildcard} & \th{Meaning} & \th{Example} \\ \hline
+		\lb \texttt{*} & Any set of characters (including none) & \texttt{rm *.php} \\ \hline
+		\lb \texttt{?} & Any single character & \texttt{rm f?.php} \\ \hline
+		\lb \texttt{[abc]} & One character from the list & \texttt{rm [ab]bc.txt} \\ \hline
+		\lb \texttt{[a-f]} & One character from a range & \texttt{ls results-[0-9][0-9].log} \\ \hline
+		\lb \texttt{[!abc]} & Any character except the list & \texttt{ls [!a]*} \\ \hline
+		\lb \texttt{[[:digit:]]} & Character class (\texttt{alpha}, \texttt{alnum}, \texttt{lower}, \texttt{upper}) & \texttt{cp res-[[:digit:]].log \textasciitilde/log} \\ \hline
+		\lb \texttt{\{a,b\}} & Group of alternatives & \texttt{rm f.\{log,txt\}} \\ \hline
+		\lb \texttt{\textbackslash} & Escape a special character & \texttt{rm my\textbackslash\ file.txt} \\ \hline
+	\end{tabularx}
+	\caption{Wildcard characters}
+	\label{tab:wildcards}
+\end{table}
+
+\textbf{Tip:} before deleting with wildcards, run \texttt{ls} with the same pattern first, then replace it with \texttt{rm} (or use \texttt{rm -i}).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Composite Commands}
+
+\begin{minipage}[c]{0.6\textwidth}
+	Linux commands follow the philosophy of \textbf{small programs that do one task well} and can be joined together. Each command has an input, a processing part, and two outputs, each with its own stream:
+	
+	\vspace{0.2cm}
+	\renewcommand{\arraystretch}{1.3}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}X|>{\centering\arraybackslash}p{1.2cm}|>{\raggedright\arraybackslash}p{1.8cm}|}
+		\hline
+		\rowcolor{TableCyan}
+		\th{Stream} & \th{ID} & \th{Default} \\ \hline
+		\lb stdin & 0 & keyboard \\ \hline
+		\lb stdout & 1 & screen \\ \hline
+		\lb stderr & 2 & screen \\ \hline
+	\end{tabularx}
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.95\linewidth]{figures/CommandModel}
+		\caption{Command model}
+		\label{CommandModel}
+	\end{figure}
+\end{minipage}
+
+\subsection{Sequential, Conditional, and Loops}
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\th{Operator} & \th{Meaning} & \th{Example} \\ \hline
+		\lb \texttt{;} & Run commands one after another, independently. & \texttt{make ; sudo make install} \\ \hline
+		\lb \texttt{\&\&} & Run the second only if the first \textbf{succeeds}. & \texttt{mkdir d \&\& cd d} \\ \hline
+		\lb \texttt{\textbar\textbar} & Run the second only if the first \textbf{fails} (error handling). & \texttt{cat f \textbar\textbar\ echo "Not found"} \\ \hline
+		\lb \texttt{for} loop & Repeat a command on many files. & \texttt{for f in *.txt; do mv \$f \$f.old; done} \\ \hline
+	\end{tabularx}
+	\caption{Sequential, conditional commands and loops}
+	\label{tab:sequential}
+\end{table}
+
+\subsection{Input/Output Redirection}
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.4cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\th{Syntax} & \th{Meaning} & \th{Example} \\ \hline
+		\lb \texttt{> file} & Output to file (overwrite) & \texttt{date > file.txt} \\ \hline
+		\lb \texttt{>{}> file} & Output to file (append) & \texttt{date >{}> file.txt} \\ \hline
+		\lb \texttt{2> file} & Errors to file & \texttt{make 2> log} \\ \hline
+		\lb \texttt{> f1 2> f2} & Output and errors to different files & \texttt{cmd > out 2> err} \\ \hline
+		\lb \texttt{> file 2>\&1} & Errors go where output goes (also \texttt{\&> file}) & \texttt{make \&> all.log} \\ \hline
+		\lb \texttt{< file} & Input read from a file & \texttt{wc -l < log.log} \\ \hline
+		\lb \texttt{/dev/null} & Black hole: discards anything written to it & \texttt{make > /dev/null} \\ \hline
+		\lb \texttt{/dev/zero} & Infinite stream of zeros & -- \\ \hline
+		\lb \texttt{/dev/urandom} & Random bytes (non-blocking) & -- \\ \hline
+	\end{tabularx}
+	\caption{Redirection and special devices}
+	\label{tab:redirection}
+\end{table}
+
+\subsection{Pipes}
+
+\begin{minipage}[c]{0.6\textwidth}
+	A \textbf{pipe} (\texttt{\textbar}) is a kernel mechanism for inter-process communication (IPC) that sends the output of one command to the input of the next. It is \textbf{unidirectional}, so two pipes are needed for two directions. The \texttt{tee} command splits the output to files and the screen at the same time.
+	
+	\vspace{0.2cm}
+	\texttt{cat *.log \textbar\ grep -i "error" \textbar\ sort > out.txt}\\
+	\texttt{make \textbar\ tee make.out.txt}\\
+	\texttt{yes \textbar\ rm -r folder/}
+\end{minipage}%
+\hfill
+\begin{minipage}[r]{0.40\textwidth}
+	\begin{figure}[H]
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/Pipe}
+		\caption{Pipe between two processes}
+		\label{Pipe}
+	\end{figure}
+\end{minipage}
+
+\subsection{Expansion and Quoting}
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.8cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\th{Type} & \th{Syntax} & \th{Example $\rightarrow$ Result} \\ \hline
+		\lb Tilde & \texttt{\textasciitilde} & \texttt{echo \textasciitilde} $\rightarrow$ \texttt{/home/user} \\ \hline
+		\lb Parameter & \texttt{\$VAR}, \texttt{\$\{VAR\}} & \texttt{echo \$PATH} \\ \hline
+		\lb Arithmetic & \texttt{\$((expr))} & \texttt{echo \$((5+6))} $\rightarrow$ \texttt{11} \\ \hline
+		\lb Brace & \texttt{\{a,b\}}, \texttt{\{1..5\}} & \texttt{mkdir a\{A,B\}} $\rightarrow$ \texttt{aA aB} \\ \hline
+		\lb Command substitution & \texttt{\$(cmd)} or backquotes & \texttt{cd /lib/modules/\$(uname -r)} \\ \hline
+		\lb Double quotes \texttt{"{}"} & Protect spaces and wildcards, but variables still expand. & \texttt{echo "\$HOME"} $\rightarrow$ \texttt{/home/user} \\ \hline
+		\lb Single quotes \texttt{'{}'} & Protect everything, including variables. & \texttt{echo '\$PATH'} $\rightarrow$ \texttt{\$PATH} \\ \hline
+	\end{tabularx}
+	\caption{Command argument expansion and quoting}
+	\label{tab:expansion}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Archiving and Compression}
+\textbf{Archiving} combines a directory tree into one file (tool: \texttt{tar}), while \textbf{compression} reduces the size of a single file. Compression tools replace the original file, so a group of files must be archived first. Compressing an already compressed file is useless and may even increase its size.
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\th{Format} & \th{Compress / Decompress} & \th{Notes} \\ \hline
+		\lb \texttt{.gz} & \texttt{gzip} / \texttt{gunzip} & Common; view with \texttt{zcat}, \texttt{zless}, \texttt{zgrep}. \\ \hline
+		\lb \texttt{.bz2} & \texttt{bzip2} / \texttt{bunzip2} & Better compression. \\ \hline
+		\lb \texttt{.lzma} & \texttt{lzma} / \texttt{unlzma} & Even better compression. \\ \hline
+		\lb \texttt{.rar} & \texttt{rar a} / \texttt{rar x} & Must be installed first. \\ \hline
+	\end{tabularx}
+	\caption{Compression tools}
+	\label{tab:compression}
+\end{table}
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{5.2cm}|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\th{Command} & \th{Effect} \\ \hline
+		\lb \texttt{tar cvf a.tar dir/} & Create an archive (\texttt{c} create, \texttt{v} verbose, \texttt{f} file). \\ \hline
+		\lb \texttt{tar tvf a.tar} & List the archive content. \\ \hline
+		\lb \texttt{tar xvf a.tar} & Extract the archive. \\ \hline
+		\lb \texttt{tar cvzf a.tar.gz dir/} & Archive + compress with gzip (\texttt{z}). \\ \hline
+		\lb \texttt{tar xvjf a.tar.bz2} & Extract a bzip2 archive (\texttt{j}). \\ \hline
+		\lb \texttt{find \textasciitilde\ -name '*.pdf' -exec tar cvf f.tar \{\} +} & Archive all PDF files found in the home directory. \\ \hline
+	\end{tabularx}
+	\caption{The \texttt{tar} command}
+	\label{tab:tar}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Regular Expressions}
+A \textbf{regular expression} (regex) is a symbolic notation used to identify patterns in text. It mixes \textbf{literals} (characters that represent themselves) and \textbf{meta-characters} (characters with a special meaning). A meta-character is treated as a literal when escaped with \texttt{\textbackslash}. The IEEE POSIX standard defines two sets: \textbf{BRE} (basic, used by \texttt{grep}) and \textbf{ERE} (extended, used by \texttt{grep -E} or \texttt{egrep}).
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\th{Symbol} & \th{Meaning} & \th{Example} \\ \hline
+		\lb \texttt{.} & Any single character (except newline) & \texttt{.zip} matches \texttt{gzip} \\ \hline
+		\lb \texttt{\textasciicircum} & Start of line & \texttt{\textasciicircum zip} \\ \hline
+		\lb \texttt{\$} & End of line & \texttt{zip\$} \\ \hline
+		\lb \texttt{[abc]}, \texttt{[a-z]} & One character from a set or range & \texttt{[bg]zip} \\ \hline
+		\lb \texttt{[\textasciicircum abc]} & Any character except the set & \texttt{[\textasciicircum bg]zip} \\ \hline
+		\lb \texttt{\textbackslash w}, \texttt{\textbackslash d}, \texttt{\textbackslash s} & Word character, digit, whitespace (capital = negation) & \texttt{\textbackslash d\textbackslash d\textbackslash d} \\ \hline
+		\lb \texttt{\textbackslash b} & Word boundary & \texttt{\textbackslash bcat\textbackslash b} \\ \hline
+		\lb \texttt{[[:alpha:]]} & POSIX character class (\texttt{digit}, \texttt{lower}, \texttt{upper}, \texttt{space}, \dots) & \texttt{[[:digit:]]} \\ \hline
+		\lb \texttt{?} \quad \texttt{*} \quad \texttt{+} & ERE quantifiers: zero or one, zero or more, one or more & \texttt{colou?r} \\ \hline
+		\lb \texttt{\{n\}}, \texttt{\{n,m\}} & Exactly $n$ times, or between $n$ and $m$ times & \texttt{a\{1,3\}} \\ \hline
+		\lb \texttt{\textbar}\ and \texttt{( )} & ERE alternation and grouping & \texttt{\textasciicircum(AAA\textbar BBB)} \\ \hline
+	\end{tabularx}
+	\caption{Regular expression symbols}
+	\label{tab:regex}
+\end{table}
+
+\subsection{grep, sed, and awk}
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{2.2cm}|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\th{Tool} & \th{Purpose} & \th{Example} \\ \hline
+		\lb \texttt{grep} & Print lines that match a pattern. Options: \texttt{-i} ignore case, \texttt{-v} invert, \texttt{-c} count, \texttt{-n} line numbers, \texttt{-l} file names, \texttt{-E} ERE. & \texttt{grep -in "error" *.log} \\ \hline
+		\lb \texttt{sed} & Stream editor; the \texttt{s} command substitutes text (\texttt{g} = all matches in a line, \texttt{\&} = matched string, \texttt{-r} = ERE). & \texttt{sed 's/day/night/g' in > out} \\ \hline
+		\lb \texttt{awk} & Processes columns of tabular data using \texttt{pattern \{ action \}} with \texttt{BEGIN} and \texttt{END} blocks. & \texttt{ls -l \textbar\ awk '\{print \$9, \$3\}'} \\ \hline
+	\end{tabularx}
+	\caption{Text processing tools}
+	\label{tab:textproc}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Getting Help, Editors, and System Information}
+
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{3.8cm}|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\th{Command} & \th{Function} \\ \hline
+		\lb \texttt{man cmd}, \texttt{info cmd}, \texttt{help cmd} & Manual pages, GNU info pages, and bash built-in help. \\ \hline
+		\lb \texttt{nano}, \texttt{vi}/\texttt{vim} & Text editors; \texttt{nano} is simple, \texttt{vim} has command, insert (\texttt{i}), and last-line (\texttt{:}) modes (\texttt{:wq} save and exit, \texttt{:q!} exit without saving). \\ \hline
+		\lb \texttt{cat}, \texttt{more}, \texttt{less} & View file content (whole, page by page, scrollable). \\ \hline
+		\lb \texttt{head -n}, \texttt{tail -n}, \texttt{diff} & First lines, last lines, and comparing two files. \\ \hline
+		\lb \texttt{whoami}, \texttt{hostname}, \texttt{date}, \texttt{uptime} & Current user, host name, date and time, and running time. \\ \hline
+		\lb \texttt{uname -a}, \texttt{free}, \texttt{du -sh} & System information, memory usage, and space used by a folder. \\ \hline
+		\lb \texttt{lsusb}, \texttt{lspci}, \texttt{lsmod}, \texttt{dmesg} & USB devices, PCI devices, loaded modules, and kernel messages. \\ \hline
+	\end{tabularx}
+	\caption{Help, editors, and system information commands}
+	\label{tab:helpsys}
+\end{table}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Practices}
+\begin{table}[h!]
+	\centering
+	\renewcommand{\arraystretch}{1.4}
+	\begin{tabularx}{\textwidth}{|>{\raggedright\arraybackslash}p{6.5cm}|>{\raggedright\arraybackslash}X|}
+		\hline
+		\rowcolor{TableCyan}
+		\th{Task} & \th{Command} \\ \hline
+		\lb Create nested folders in one command & \texttt{mkdir -p project/src/docs} \\ \hline
+		\lb Remove a file named \texttt{-report.txt} & \texttt{rm ./-report.txt} \\ \hline
+		\lb Show the inode number of a file & \texttt{ls -i file} \\ \hline
+		\lb Create a hard link and a symbolic link & \texttt{ln f hard} \quad and \quad \texttt{ln -s \$(pwd)/f soft} \\ \hline
+		\lb Save output and errors in one file & \texttt{make \&> build.log} \\ \hline
+		\lb Compress a folder with gzip & \texttt{tar cvzf backup.tar.gz folder/} \\ \hline
+		\lb Find all lines containing ``error'' & \texttt{grep -in "error" *.log} \\ \hline
+	\end{tabularx}
+	\caption{Linux practices}
+	\label{tab:linuxpractices}
+\end{table}
